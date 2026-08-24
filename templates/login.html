@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Screen</title>    
+    <link rel="stylesheet" href="{% static 'staticCSS/login.css' %}">
+</head>
+<body>
+
+    <!-- Cabeçalho / Navbar inspirada no modelo do Hospital -->
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-hospital-user"></i> Hospital <span>+</span>
+        </div>
+        <nav>
+            <a href="#">Entrar</a>
+            <a href="#">Serviços</a>
+            <a href="#">Contato</a>
+        </nav>
+    </header>
+
+    <!-- Container responsável por centralizar o formulário na tela abaixo do navbar -->
+    <div class="form-container">
+        <div class="login-container">
+            <!-- Logo -->
+            <div class="logo-title-container">
+            
+            </div>
+            <h1 class="main-heading">CAYAC</h1>
+            <div class="logo">C</div> 
+            <!-- Título Principal -->
+            <p class="sub-heading">Venha nos conhecer</p>
+
+            <!-- Campos de Login -->
+            <input type="text" class="input-field" placeholder="Email  ">
+            <input type="password" class="input-field" placeholder="Senha">
+
+            <!-- Botão de Login -->
+            <button class="login-button">Entrar</button>
+
+            <!-- Divisor com "Or" -->
+            <div class="divider">
+                <span class="divider-text">Or</span>
+            </div>
+
+            <!-- Botões de Login Social -->
+            <div class="social-buttons">
+            </div>
+
+            <!-- Texto de Registro -->
+            <p class="Cadastre-se-text">
+                Não tem conta? <a href="{% url 'pagina_cadastro'%}" class="Cadastre-se-link">Cadastre-se</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

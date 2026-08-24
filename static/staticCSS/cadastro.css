@@ -1,0 +1,195 @@
+/* ===================================
+    1. Configurações Gerais
+   =================================== */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #005b96; /* Azul do fundo baseado no modelo 74632 */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===================================
+    2. Cabeçalho / Navbar
+   =================================== */
+.navbar {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #005b94;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar .logo span {
+    color: #00a896;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: #4a5568;
+    margin-left: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.navbar nav a:hover {
+    color: #005b94;
+}
+
+/* ===================================
+    3. Container de Cadastro
+   =================================== */
+.main-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.card-cadastro {
+    background-color: #bfe3f7; /* Azul claro do card central */
+    width: 100%;
+    max-width: 420px;
+    padding: 35px 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Ícone superior circular */
+.card-icon {
+    width: 55px;
+    height: 55px;
+    background-color: #5e3897; /* Tom roxo/escuro do modelo CAYAC */
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px;
+    font-size: 1.4rem;
+}
+
+.card-cadastro h2 {
+    color: #1a202c;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.card-cadastro .subtitle {
+    color: #4a5568;
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+}
+
+/* ===================================
+    4. Formulário e Campos de Entrada
+   =================================== */
+.form-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-group i {
+    position: absolute;
+    left: 14px;
+    color: #718096;
+    font-size: 1rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 14px 12px 40px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-group input:focus {
+    border-color: #005b96;
+    box-shadow: 0 0 0 3px rgba(0, 91, 150, 0.15);
+}
+
+/* ===================================
+    5. Botões e Divisor
+   =================================== */
+.btn-submit {
+    background-color: #4882a8; /* Tom azul do botão central */
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 5px;
+}
+
+.btn-submit:hover {
+    background-color: #366787;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #90cdf4;
+}
+
+.divider span {
+    padding: 0 10px;
+    color: #4a5568;
+    font-size: 0.85rem;
+}
+
+/* Link de login */
+.login-link {
+    font-size: 0.9rem;
+    color: #2d3748;
+}
+
+.login-link a {
+    color: #3b2063;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}

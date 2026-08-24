@@ -1,0 +1,223 @@
+/* ==========================================
+   CONFIGURAÇÕES GERAIS & PALETA DE CORES
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --azul-hospitalar: #005b94;    /* Cor principal (Confiança) */
+    --azul-escuro: #003b66;        /* Textos e Destaques */
+    --verde-saude: #00a896;        /* Botões e Detalhes de destaque */
+    --cinza-fundo: #f4f8fa;        /* Fundo de seções intercaladas */
+    --branco: #ffffff;
+    --texto-escuro: #334155;
+    --borda: #e2e8f0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--texto-escuro);
+    background-color: var(--branco);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+.text-center {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--azul-escuro);
+    font-size: 2rem;
+    position: relative;
+}
+
+/* Detalhe visual abaixo dos títulos principais */
+.text-center::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--verde-saude);
+    margin: 10px auto 0 auto;
+    border-radius: 2px;
+}
+
+/* ==========================================
+   HEADER & MENU DE NAVEGAÇÃO
+   ========================================== */
+header {
+    background-color: var(--branco);
+    box-shadow: 0 4px 15px rgba(0, 91, 148, 0.08); /* Sombra leve azulada */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo h2 {
+    color: var(--azul-hospitalar);
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo span {
+    color: var(--verde-saude);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav ul a {
+    text-decoration: none;
+    color: var(--texto-escuro);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav ul a:hover {
+    color: var(--azul-hospitalar);
+}
+
+/* ==========================================
+   SEÇÃO INÍCIO (HERO)
+   ========================================== */
+.hero {
+    background: linear-gradient(135deg, rgba(0, 91, 148, 0.9), rgba(0, 59, 102, 0.85)),
+                url("../imagens/Recepcao.jpg") no-repeat center center/cover;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+}
+
+.hero-content {
+    max-width: 650px;
+    color: #ffffff;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.btn-principal {
+    display: inline-block;
+    background-color: var(--verde-saude);
+    color: var(--branco);
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: transform 0.2s, background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 168, 150, 0.3);
+}
+
+.btn-principal:hover {
+    background-color: #008f80;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   SEÇÃO UNIDADES PARCEIRAS (CARDS)
+   ========================================== */
+.servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.card-servico {
+    background-color: var(--branco);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--borda);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-servico:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-servico img {
+    width: 50%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card-servico h3 {
+    color: var(--azul-escuro);
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.card-servico p {
+    color: var(--texto-escuro);
+    font-size: 0.95rem;
+}
+
+/* ==========================================
+   SEÇÃO SOBRE NÓS
+   ========================================== */
+.sobre-grid {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.sobre-texto h2 {
+    color: var(--azul-escuro);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.sobre-texto p {
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+}
+
+.sobre-imagem img {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

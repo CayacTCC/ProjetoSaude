@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Vida & Saúde</title>
+    <link rel="stylesheet" href="{% static 'staticCSS/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="container menu-container">
+            <div class="logo">
+                <h2>Hospital <span><a href="{% url 'home_publica' %}"><img class="icone" src="{% static 'imagens/icone.png' %}" alt="logohospital"></a></span></h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'pagina_login' %}">Entrar</a></li>                 
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>               
+        <section id="entrar" class="hero">
+            <div class="container hero-content">
+                <h1>Cuidando da sua saúde em todos os momentos</h1>
+                <p>Nossa missão é tem que ser definida.</p>
+                <a href="{% url 'pagina_login' %}" class="btn-principal">Agende uma Consulta</a>
+            </div>
+        </section>
+
+        <section id="servicos" class="section-padding">
+            <div class="container">
+                <h2 class="text-center">Unidades Parceiras</h2>
+                <div class="servicos-grid">
+                    <div class="card-servico">
+                        <img src="../static/imagens/FachadaSantaCasa.jpeg" alt="Santa Casa">
+                        <h3>Santa Casa</h3>
+                        <p>Avenida Doutor Cláudio Luiz da Costa, número 50, no bairro Jabaquara, Santos (CEP 11075-900).</p>
+                    </div>
+                    <div class="card-servico">
+                        <img src="../static/imagens/HospitalAnaCosta.jpeg" alt="Ana Costa">
+                        <h3>Ana Costa</h3>
+                        <p>Rua Pedro Américo, 60, no bairro do Campo Grande, Santos (SP).</p>
+                    </div>
+                    <div class="card-servico">
+                        <img src="../static/imagens/HospitalMontSerrat.jpg" alt="Mont Serrat">
+                        <h3>Mont Serrat</h3>
+                        <p>Praça Correia de Mello, nº 33, Centro Histórico, Santos - SP.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="section-padding">
+            <div class="container contato-grid">
+                <div class="form-container">
+                    <h2>Fale Conosco</h2>
+                    <!--Não mexer no "Fale Conosco", iremos fazer ele jogar para o whatsApp e usaremos a API da Meta IA -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="{% static 'staticJS/script.js' %}"></script>
+</body>
+</html>

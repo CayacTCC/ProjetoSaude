@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #015C92;
+    margin: 0;
+    padding-top: 80px; /* espaço do navbar fixo */
+    font-family: Arial, sans-serif;
+}
+
+/* Container novo só pro form centralizar */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px); /* 100vh menos altura do navbar */
+}
+
+.navbar {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between; /* logo de um lado, menu do outro */
+    align-items: center;
+    padding: 15px 50px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    /* Isso aqui que joga pro topo */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Estilo pros links do menu */
+.navbar nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #015C92; /* azul do seu fundo */
+}
+
+.navbar .logo span {
+    color: #6a0dad; /* roxo do + */
+}
+
+/* Quadradinho */
+.login-container {
+    background-color: #b2e3fc;
+    padding: 24px;
+    border-radius: 8px;
+    width: 320px;
+    text-align: center;
+}
+
+/* Logo e título lado a lado */
+.logo-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Reduzido para caber nos 320px de largura */
+    margin: 20px auto 24px auto; /* Sintaxe de margem corrigida */
+}
+
+.logo {
+    background-color: #401a8b;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    flex-shrink: 0; /* Impede que a logo encolha */
+}
+
+.logo-text {
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    font-family: cursive;
+}
+
+/* Título */
+.main-heading {
+    color: #090807;
+    font-size: 24px;
+    font-family: cursive;
+    position: relative; 
+    top: 35px;
+    margin-right: 25px;
+}
+
+.sub-heading {
+    color: rgba(9, 4, 4, 0.7);
+    font-size: 12px;
+    margin-bottom: 24px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 14px;
+}
+
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #468cb8;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: rgba(10, 7, 7, 0.7);
+}
+
+.divider-text {
+    padding: 0 8px;
+    color: rgba(13, 1, 1, 0.7);
+    font-size: 14px;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.social-button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Botão de login com facebook */
+.fb-button {
+    background-color: #69c2f9;
+}

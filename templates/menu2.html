@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu de Perfil - Hospital São Francisco</title>
+    <!-- Link para o Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Link para o CSS externo -->
+    <link rel="stylesheet" href="{% static 'staticCSS/menu2.css' %}">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="https://via.placeholder.com/50" alt="Logo Hospital São Francisco">
+            <h1>Hospital São Francisco</h1>
+        </div>
+        <div class="auth-buttons">
+            <a href="#" class="btn btn-login">Login</a>
+            <a href="#" class="btn btn-cadastro">Cadastre-se</a>
+        </div>
+    </header>
+
+    <!-- Menu Principal -->
+    <nav class="menu-principal">
+        <ul class="nav-links">
+            <li><a href="#">Início</a></li>
+            <li class="dropdown">
+                <a href="#">Área do Paciente <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Meu Prontuário</a>
+                    <a href="#">Agendamentos</a>
+                    <a href="#">Receitas e Medicamentos</a>
+                    <a href="#">Telemedicina</a>
+                    <a href="#">Página de Saúde</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#">Área Médica <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Dashboard Profissional</a>
+                    <a href="#">Exames e Laudos</a>
+                    <a href="#">Educação Continuada</a>
+                    <a href="#">Pesquisa Clínica</a>
+                </div>
+            </li>
+            <li><a href="#">Institucional</a></li>
+            <li class="dropdown">
+                <a href="#">Serviços <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Clínicas e Departamentos</a>
+                    <a href="#">Serviços de Apoio</a>
+                    <a href="#">Emergência</a>
+                    <a href="#">Exames e Procedimentos</a>
+                </div>
+            </li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo do Perfil -->
+    <div class="perfil-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Meu Perfil</h3>
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Meu Prontuário</a></li>
+                <li><a href="#">Agendamentos</a></li>
+                <li><a href="#">Receitas</a></li>
+                <li><a href="#">Exames</a></li>
+                <li><a href="#">Mensagens</a></li>
+                <li><a href="#">Configurações</a></li>
+            </ul>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="conteudo-perfil">
+            <h2>Dashboard</h2>
+
+            <div class="card">
+                <h3>Próximos Agendamentos</h3>
+                <p>Você tem 2 consultas agendadas para esta semana.</p>
+                <a href="#" class="btn-acao">Ver Detalhes</a>
+            </div>
+
+            <div class="card">
+                <h3>Exames Recentes</h3>
+                <p>Seus últimos exames estão disponíveis para visualização.</p>
+                <a href="#" class="btn-acao">Acessar Resultados</a>
+            </div>
+
+            <div class="card">
+                <h3>Receitas Ativas</h3>
+                <p>Você tem 3 receitas válidas. Não esqueça de renovar quando necessário.</p>
+                <a href="#" class="btn-acao">Ver Receitas</a>
+            </div>
+        </main>
+    </div>
+        <div class="redes-sociais">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>&copy; 2026 Hospital São Francisco. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
