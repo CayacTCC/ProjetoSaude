@@ -5,10 +5,25 @@ def menu_vitrine(request):
     return render (request, 'index.html')
 
 def menu_painel(request):
-    return render (request, 'index.html')
+    return render (request, 'menu2.html')
 
 def login_view(request):
-    return render (request, 'login.html')
+
+    if request.method == "POST":
+        email_digitado = request.POST.get('email')
+        senha_digitada = request.POST.get('senha')
+
+        try:
+            paciente = Paciente.objects.get(email=email_digitado, senha=senha_digitada)
+
+            request.session['paciente_id'] = paciente.id
+
+            return redirect('home_privada')
+    
+        except Paciente.DoesNotExist:
+            erro = "Email ou senha incorretos. Tente novamente!"
+
+    return render(request, 'login.html')
 
 def cadastro_view(request):
     if request.method == "POST":
@@ -24,6 +39,6 @@ def cadastro_view(request):
             senha=senha_digitado            
         )
 
-        return redirect('login')
+        return redirect('home_privada')
 
     return render(request, 'cadastro.html')

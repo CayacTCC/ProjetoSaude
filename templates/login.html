@@ -1,10 +1,11 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Screen</title>    
+    <title>Tela de Login</title>    
     <link rel="stylesheet" href="{% static 'staticCSS/login.css' %}">
 </head>
 <body>
@@ -33,12 +34,23 @@
             <!-- Título Principal -->
             <p class="sub-heading">Venha nos conhecer</p>
 
-            <!-- Campos de Login -->
-            <input type="text" class="input-field" placeholder="Email  ">
-            <input type="password" class="input-field" placeholder="Senha">
+            <!-- Formulário de LOGIN -->
+            <form method="POST">
+                {% csrf_token %}
 
-            <!-- Botão de Login -->
-            <button class="login-button">Entrar</button>
+                {% if erro %}
+                    <p style="color: red; text-align: center; font-size: 14px; margin-bottom: 10px;">{{ erro }}</p>
+                {% endif %}
+
+                <!--O campo de login-->
+                <input type="email" name="email" class="input-field" placeholder="Email" required>
+                <input type="password" name="senha" class="input-field" placeholder="Senha" required>
+
+                <!-- O botão de LOGIN -->
+                <button type="submit" class="login-button">Entrar</button>
+
+            </form>
+
 
             <!-- Divisor com "Or" -->
             <div class="divider">
