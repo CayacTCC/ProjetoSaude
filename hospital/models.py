@@ -19,11 +19,18 @@ class Exame(models.Model):
     def __str__(self):
         return f"{self.nome} ({self.tipo.nome})"
 
+class ExameEspecifico(models.Model):
+    nome = models.CharField(max_length=150)
+    exame_base = models.ForeignKey(Exame, on_delete=models.CASCADE, related_name="Especificacoes")
+
+    def __str__(self):
+        return f"{self.nome}"
+
 class Hospital(models.Model):
     nome = models.CharField(max_length=150)
     endereco = models.CharField(max_length=255)
     planos_aceitos = models.ManyToManyField(PlanoSaude)
-    exames_disponiveis = models.ManyToManyField(Exame)
+    exames_disponiveis = models.ManyToManyField(ExameEspecifico)
     #Vamos englobar hospitais da Baixada Santista, são 9 municípios: Santos, São Vicente, Praia Grande, Guarujá, Bertioga, Peruíbe, Cubatão, Itanhaém e Mongaguá 
 
     def __str__(self):
