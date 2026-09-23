@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Usuário - Hospital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cabeçalho idêntico ao do site -->
+  <header class="navbar">
+    <div class="logo">
+      <span>Hospital</span>
+      <span class="logo-icon">+</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#">Serviços</a>
+      <a href="#">Contato</a>
+      <a href="#" class="user-badge">Meu Perfil</a>
+    </nav>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-container">
+    <div class="profile-card">
+      
+      <!-- Avatar do Usuário -->
+      <div class="avatar-container">
+        <div class="avatar-circle"></div>
+      </div>
+
+      <h2>Perfil do Usuário</h2>
+      <p class="subtitle">Cuidando da sua saúde em todos os momentos</p>
+
+      <!-- Informações do Usuário -->
+      <div class="profile-info">
+        <div class="info-group">
+          <label>Nome Completo</label>
+          <div class="info-value">João da Silva</div>
+        </div>
+
+        <div class="info-group">
+          <label>E-mail</label>
+          <div class="info-value">joao.silva@email.com</div>
+        </div>
+
+        <div class="info-group">
+          <label>Telefone</label>
+          <div class="info-value">(11) 98765-4321</div>
+        </div>
+
+        <div class="info-group">
+          <label>CPF</label>
+          <div class="info-value">123.456.789-00</div>
+        </div>
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="actions">
+        <button class="btn-primary">Agendar Consulta</button>
+        <button class="btn-secondary">Editar Perfil</button>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
