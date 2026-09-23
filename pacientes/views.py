@@ -42,3 +42,27 @@ def cadastro_view(request):
         return redirect('home_privada')
 
     return render(request, 'cadastro.html')
+
+def cadastro_enderecoP(request):
+    if request.method == "POST":
+        cep_digitado = request.POST.get('cep')
+
+        url = f"https://viacep.com.br/ws/{cep_digitado}/json/"
+        resposta = request.get(url)
+
+        if resposta.status.code == 200:
+            dados = resposta.json()
+            if "erro" not in dados:
+                perfil = Paciente.objects.get(usuario=request.user)
+
+                perfil.cep = cep_digitado
+                perfil.rua = dados.get('logradouro')
+                perfil.bairro = dados.get('bairro')
+                perfil.cidade = dados.get('localidade')
+                perfil.uf = dados.get('uf')
+
+                perfil.save()
+
+                return redirect('pagina_sucesso')
+
+    return render(request, 'cadastrar_cep.html')

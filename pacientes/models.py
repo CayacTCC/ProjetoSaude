@@ -8,8 +8,14 @@ class Paciente(models.Model):
     senha = models.CharField(max_length=128)
     telefone = models.CharField(max_length=15, blank=True, null=True)
     data_nascimento = models.DateField(blank=True, null=True)
+    
+    cep = models.CharField(max_length=9, blank=True, null=True)
+    rua = models.CharField(max_length=150, blank=True, null=True)
+    bairro = models.CharField(max_length=100, blank=True, null=True)
+    cidade = models.CharField(max_length=100, blank=True, null=True)
+    uf = models.CharField(max_length=2, blank=True, null=True)
 
     plano_de_saude = models.ForeignKey(PlanoSaude, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return self.nome
+        return f"{self.nome} - {self.cidade}"
