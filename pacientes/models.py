@@ -1,7 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 from hospital.models import PlanoSaude
 
 class Paciente(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name='paciente_perfil')
+
     nome = models.CharField(max_length=150)
     cpf = models.CharField(max_length=14, unique=True)
     email = models.EmailField(unique=True)

@@ -1,4 +1,6 @@
+import requests
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Paciente
 
 def menu_vitrine(request):
@@ -44,25 +46,42 @@ def cadastro_view(request):
     return render(request, 'cadastro.html')
 
 def cadastro_enderecoP(request):
+
     if request.method == "POST":
-        cep_digitado = request.POST.get('cep')
+        cep_digitado = request.POST.get('cep', '').replace('-', '').strip()
 
-        url = f"https://viacep.com.br/ws/{cep_digitado}/json/"
-        resposta = request.get(url)
+        if cep_digitado:
+            url = f"https://viacep.com.br/ws/{cep_digitado}/json/"
+        
+            try:
+                resposta = requests.get(url)
 
-        if resposta.status.code == 200:
-            dados = resposta.json()
-            if "erro" not in dados:
-                perfil = Paciente.objects.get(usuario=request.user)
+                if resposta.status_code == 200:
+                    dados = resposta.json()
 
-                perfil.cep = cep_digitado
-                perfil.rua = dados.get('logradouro')
-                perfil.bairro = dados.get('bairro')
-                perfil.cidade = dados.get('localidade')
-                perfil.uf = dados.get('uf')
+                    if "erro" not in dados:
+                        try:
+                            perfil = Paciente.objects.get(usuario=request.user)
 
-                perfil.save()
+                            perfil.cep = cep_digitado
+                            perfil.rua = dados.get('logradouro')
+                            perfil.bairro = dados.get('bairro')
+                            perfil.cidade = dados.get('localidade')
+                            perfil.uf = dados.get('uf')
 
-                return redirect('pagina_sucesso')
+                            perfil.save()
+                            messages.success(request, "Endereço atualizado com sucesso!")
+                            return redirect('perfil_usuario')
 
-    return render(request, 'cadastrar_cep.html')
+                        except Paciente.DoesNotExist:
+                            messages.error(request, "Perfil de paciente não encontrado.")
+        
+                    else:
+                        messages.error(request, "CEP não encontrado.")
+            except requests.exceptions.RequestException:
+                messages.error(request, "Erro ao consultar o ViaCEP. Tente novamente.")
+
+    return render(request, 'pagina_usuario.html')
+
+def perfil_view(request):
+    return render (request, 'pagina_usuario.html') 
