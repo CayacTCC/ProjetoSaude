@@ -29,9 +29,15 @@ class ExameEspecifico(models.Model):
 class Hospital(models.Model):
     nome = models.CharField(max_length=150)
     endereco = models.CharField(max_length=255)
+    cidade = models.CharField(max_length=100, help_text="Ex: Santos, Guarujá, São Vicente...")
+    cep = models.CharField(max_length=9, blank=True, null=True)
+    
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+
     planos_aceitos = models.ManyToManyField(PlanoSaude)
     exames_disponiveis = models.ManyToManyField(ExameEspecifico)
     #Vamos englobar hospitais da Baixada Santista, são 9 municípios: Santos, São Vicente, Praia Grande, Guarujá, Bertioga, Peruíbe, Cubatão, Itanhaém e Mongaguá 
 
     def __str__(self):
-        return self.nome
+        return f"{self.nome} ({self.cidade})"
