@@ -4,3 +4,5 @@ db.sqlite3
 *.pyc
 Notas.txt
 *.pyo
+ProjetoSaude\hospital\migrations\__pycache__
+ProjetoSaude\pacientes\migrations\__pycache__
