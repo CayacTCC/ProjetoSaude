@@ -42,7 +42,7 @@ def cadastro_view(request):
         email_digitado = request.POST.get('email')
         senha_digitada = request.POST.get('senha')
 
-        if User.objects.filter(email=email_digitado).exist():
+        if User.objects.filter(email=email_digitado).exists():
             messages.error(request, "Este email já está cadastrado.")
             return render(request, 'cadastro.html')
 

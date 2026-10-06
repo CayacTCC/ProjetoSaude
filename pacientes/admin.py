@@ -4,7 +4,7 @@ from .models import Paciente, HistoricoExame
 @admin.register(Paciente)
 class PacienteAdmin(admin.ModelAdmin):
     list_display = ('get_nome', 'get_email', 'cpf', 'cidade')
-    search_fields = ('usuario__firt_name', 'usuario__email', 'cpf')
+    search_fields = ('usuario__fisrt_name', 'usuario__email', 'cpf')
 
     @admin.display(ordering='usuario__first_name', description="Nome")
     def get_nome(self, obj):

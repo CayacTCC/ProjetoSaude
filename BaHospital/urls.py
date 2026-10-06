@@ -25,5 +25,6 @@ urlpatterns = [
     path('painel/', views.menu_painel, name='home_privada'),
     path('login/', views.login_view, name='pagina_login'),
     path('cadastro/', views.cadastro_view, name='pagina_cadastro'),
-    path('perfil/', views.perfil_view, name='perfil_usuario')
+    path('perfil/', views.perfil_view, name='perfil_usuario'),
+    path('agendamentos/', include('agendamentos.urls')),
 ]
