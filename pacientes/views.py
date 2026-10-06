@@ -1,30 +1,38 @@
+#já arrumado
+
 import requests
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from .models import Paciente
 
 def menu_vitrine(request):
     return render (request, 'index.html')
 
+@login_required(login_url='pagina_login')
 def menu_painel(request):
     return render (request, 'menu2.html')
 
 def login_view(request):
-
     if request.method == "POST":
         email_digitado = request.POST.get('email')
         senha_digitada = request.POST.get('senha')
 
         try:
-            paciente = Paciente.objects.get(email=email_digitado, senha=senha_digitada)
+            user = User.objects.get(email=email_digitado)
+            user_autenticado = authenticate(request, username=user.username, password=senha_digitada)
 
-            request.session['paciente_id'] = paciente.id
+            if user_autenticado is not None:
+                login(request, user_autenticado)
+                return redirect('home_privada')
+            else :
+                messages.error(request, "Senha incorreta. Tente novamente!")
 
-            return redirect('home_privada')
+        except User.DoesNotExist:
+            messages.error(request, "Email não encontrado.")
     
-        except Paciente.DoesNotExist:
-            erro = "Email ou senha incorretos. Tente novamente!"
-
     return render(request, 'login.html')
 
 def cadastro_view(request):
@@ -32,21 +40,31 @@ def cadastro_view(request):
         nome_digitado = request.POST.get('nome')
         cpf_digitado = request.POST.get('cpf')
         email_digitado = request.POST.get('email')
-        senha_digitado = request.POST.get('senha')
+        senha_digitada = request.POST.get('senha')
 
-        Paciente.objects.create(
-            nome=nome_digitado,
-            cpf=cpf_digitado,
+        if User.objects.filter(email=email_digitado).exist():
+            messages.error(request, "Este email já está cadastrado.")
+            return render(request, 'cadastro.html')
+
+        user = User.objects.create_user(
+            username=email_digitado,
             email=email_digitado,
-            senha=senha_digitado            
+            password=senha_digitada,
+            first_name=nome_digitado
         )
 
+        Paciente.objects.create(
+            usuario=user,
+            cpf=cpf_digitado            
+        )
+
+        login(request, user)
         return redirect('home_privada')
 
     return render(request, 'cadastro.html')
 
+@login_required(login_url='pagina_login')
 def cadastro_enderecoP(request):
-
     if request.method == "POST":
         cep_digitado = request.POST.get('cep', '').replace('-', '').strip()
 
@@ -83,5 +101,6 @@ def cadastro_enderecoP(request):
 
     return render(request, 'pagina_usuario.html')
 
+@login_required(login_url='pagina_login')
 def perfil_view(request):
     return render (request, 'pagina_usuario.html') 

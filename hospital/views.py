@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from .models import Hospital
 from pacientes.models import Paciente
 
+@login_required(login_url='pagina_login')
 def listar_hospitais_perto(request):
     paciente = Paciente.objects.get(usuario=request.user)
 
