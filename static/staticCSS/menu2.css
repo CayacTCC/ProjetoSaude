@@ -291,3 +291,45 @@ footer {
         width: 100%;
     }
 }
+/* ==========================================
+    SEÇÃO UNIDADES PARCEIRAS (CARDS)
+   ========================================== */
+   .servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.card-servico {
+    background-color: var(--branco);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--borda);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-servico:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-servico img {
+    width: 50%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card-servico h3 {
+    color: var(--azul-escuro);
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.card-servico p {
+    color: var(--texto-escuro);
+    font-size: 0.95rem;
+}
