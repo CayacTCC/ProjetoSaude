@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from hospital.models import PlanoSaude
 
 class Paciente(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name='paciente_perfil')
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='paciente_perfil')
 
     
     cpf = models.CharField(max_length=14, unique=True)
@@ -29,8 +29,8 @@ class Paciente(models.Model):
     medicacoes_uso_continuo = models.TextField(blank=True, null=True, help_text="Ex: Losartana 50mg")
 
     def __str__(self):
-        nome = self.usuario.first_name if self.usuario else "Sem Nome"
-        return f"{self.nome} - {self.cidade}"
+        nome = self.usuario.first_name if self.usuario.first_name else "Sem Nome"
+        return f"{nome} - {self.cidade}"
 
 class HistoricoExame(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name="historico_exames")
