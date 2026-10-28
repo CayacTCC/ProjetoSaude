@@ -26,8 +26,6 @@ class Exame(models.Model):
         ordering = ['nome']
 
     def __str__(self):
-        if self.descricao:
-            return f"{self.nome} - [{self.descricao}] - ({self.tipo.nome})"
         return f"{self.nome} ({self.tipo.nome})"
 
 class ExameEspecifico(models.Model):
@@ -39,6 +37,8 @@ class ExameEspecifico(models.Model):
         ordering = ['nome']
 
     def __str__(self):
+        if self.descricao:
+            return f"{self.nome} - [{self.descricao}]"
         return f"{self.nome}"
 
 class Hospital(models.Model):
