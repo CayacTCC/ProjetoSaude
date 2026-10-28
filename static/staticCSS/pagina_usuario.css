@@ -130,7 +130,7 @@
   .actions {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 150px;
   }
   
   .btn-primary {
@@ -138,11 +138,11 @@
     color: #ffffff;
     border: none;
     padding: 12px;
-    border-radius: 20px;
-    font-size: 14px;
+    border-radius: 90px;
+    font-size: 50px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.9s;
   }
   
   .btn-primary:hover {
@@ -153,9 +153,9 @@
     background-color: #487c9b; /* Azul do botão de cadastro */
     color: #ffffff;
     border: none;
-    padding: 12px;
-    border-radius: 6px;
-    font-size: 14px;
+    padding: 40px;
+    border-radius: 15px;
+    font-size: 44px;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.2s;
