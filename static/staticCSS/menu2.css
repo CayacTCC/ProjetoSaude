@@ -26,15 +26,20 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-left: auto;
+
 }
 
 .logo img {
     height: 50px;
+    
 }
 
 .logo h1 {
     font-size: 1.5rem;
 }
+
+
 
 /* Menu principal */
 .menu-principal {
@@ -291,3 +296,44 @@ footer {
         width: 100%;
     }
 }
+
+/*menu perfil de usuario*/  
+
+
+.perfil img {
+    
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    
+
+}
+
+#fotoPerfil {
+    display: none;
+    
+
+}
+
+#preview{
+
+margin-left: auto;
+
+
+
+}
+
+
+
+    .MeuPerfil{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1rem;
+        
+
+    }
+
+
