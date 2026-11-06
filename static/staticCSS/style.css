@@ -214,6 +214,7 @@ nav ul a:hover {
     gap: 50px;
 }
 
+
 .sobre-texto h2 {
     color: var(--azul-escuro);
     font-size: 2rem;
@@ -232,3 +233,76 @@ nav ul a:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+#titulo {
+    text-align: center;
+    color: var(--azul-escuro);
+    margin: 40px 0 20px;
+}
+
+/* ==========================================
+    SEÇÃO SOBRE O GRUPO CAYAC
+   ========================================== */
+   .sobre-cayac {
+    background-color: var(--cinza-fundo);
+    padding: 60px 0;
+}
+
+.card-sobre {
+    background-color: var(--branco);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 45px 50px;
+    border-radius: 16px;
+    border-top: 5px solid var(--verde-saude);
+    box-shadow: 0 8px 30px rgba(0, 91, 148, 0.1);
+}
+
+.card-sobre h2 {
+    font-family: 'Nunito', 'Segoe UI', sans-serif;
+    color: var(--azul-escuro);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Tracinho verde embaixo do título */
+.card-sobre h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--verde-saude);
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.card-sobre p {
+    font-family: 'Nunito', 'Segoe UI', sans-serif;
+    color: var(--texto-escuro);
+    font-size: 1.1rem;
+    line-height: 1.9;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.card-sobre p:last-child {
+    margin-bottom: 0;
+    font-weight: 600;
+    color: var(--azul-hospitalar);   /* destaque na frase final */
+}
+
+/* Celular */
+@media (max-width: 600px) {
+    .card-sobre {
+        padding: 30px 22px;
+    }
+
+    .card-sobre h2 {
+        font-size: 1.6rem;
+    }
+
+    .card-sobre p {
+        font-size: 1rem;
+        text-align: left;   /* justificado em tela estreita deixa espaços estranhos */
+    }
+}
