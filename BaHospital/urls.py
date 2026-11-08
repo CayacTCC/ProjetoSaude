@@ -27,4 +27,5 @@ urlpatterns = [
     path('cadastro/', views.cadastro_view, name='pagina_cadastro'),
     path('perfil/', views.perfil_view, name='perfil_usuario'),
     path('agendamentos/', include('agendamentos.urls')),
+    
 ]
