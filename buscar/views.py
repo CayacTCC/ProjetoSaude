@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from hospital.models import Hospital, PlanoSaude, Exame, ExameEspecifico
 from pacientes.models import Paciente
-from pacientes import views
 from pacientes.models import Paciente
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
