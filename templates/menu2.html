@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil e Cadastro - Cayac Saúde</title>
+    <link rel="stylesheet" href="{% static 'staticCSS/menu2.css' %}">
+    <script src="menu2.js" defer></script>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS Externo -->
-    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -28,7 +30,7 @@
             <span class="logo-text">Cayac <span>Saúde</span></span>
         </div>
         <div class="user-action-buttons">
-            <a href="#" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> Sair</a>
+            <a href="{% url 'pagina_login' %}" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> Sair</a>
         </div>
     </header>
 
@@ -68,10 +70,10 @@
                 <h4>Minha Conta</h4>
             </div>
             <ul class="sidebar-menu">
-                <li><a href="#" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fas fa-file-medical"></i> Meu Prontuário</a></li>
-                <li><a href="#"><i class="fas fa-calendar-alt"></i> Agendamentos</a></li>
-                <li><a href="#"><i class="fas fa-user-edit"></i> Cadastro / Endereço</a></li>
+                <li><a href="#" class="active"><i class="fas fa-chart-line"></i>Meu Perfil</a></li>
+                <li><a href="#"><i class="fas fa-file-medical"></i>Meu Prontuário</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i>Agendamentos</a></li>
+                <li><a href="#"><i class="fas fa-user-edit"></i> Atualizar Endereço</a></li>
                 <li><a href="#"><i class="fas fa-pills"></i> Receitas</a></li>
                 <li><a href="#"><i class="fas fa-notes-medical"></i> Exames</a></li>
                 <li><a href="#"><i class="fas fa-cog"></i> Configurações</a></li>
@@ -81,7 +83,7 @@
         <!-- Main Content -->
         <main class="conteudo-perfil">
             <div class="page-header">
-                <h2>Atualização de Cadastro e Endereço</h2>
+                <h2>Atualização de Endereço</h2>
                 <p>Preencha ou atualize seus dados cadastrais para facilitar o agendamento de consultas e atendimento na rede.</p>
             </div>
 
@@ -89,18 +91,14 @@
             <div class="card-form-container">
                 <form id="form-cadastro">
                     <div class="form-grid">
-                        <div class="form-group">
-                            <label for="nome">Nome Completo</label>
-                            <input type="text" id="nome" placeholder="Digite seu nome completo" required>
-                        </div>
-
+                        
                         <div class="form-group">
                             <label for="cep">CEP</label>
                             <input type="text" id="cep" placeholder="Digite apenas números" maxlength="8" required>
                         </div>
 
                         <div class="form-group full-width">
-                            <label for="rua">Endereço (Rua / Logradouro)</label>
+                            <label for="rua">Rua</label>
                             <input type="text" id="rua" placeholder="Preenchido automaticamente pelo CEP" required>
                         </div>
 
