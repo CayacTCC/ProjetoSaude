@@ -5,135 +5,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu de Perfil - CAYAC Saúde</title>
-    <!-- Link para o Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Link para o CSS externo -->
+    <title>Perfil e Cadastro - Cayac Saúde</title>
     <link rel="stylesheet" href="{% static 'staticCSS/menu2.css' %}">
+    <script src="menu2.js" defer></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Externo -->
+
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <img src="/static/imagens/Logo_CAYAC.png" alt="Logo Hospital São Francisco">
-            <h1>CAYAC Saúde</h1>
-        </div><button class="btn" id="abrir">Agendar consulta</button>
 
-        <div class="overlay" id="overlay">
-        <div class="popup" role="dialog" aria-modal="true" aria-labelledby="titulo">
-        <button class="fechar" id="fechar" aria-label="Fechar">&times;</button>
-        
-        <form id="formAgendamento">        
-            <h2 id="titulo">Agendar consulta</h2>
-        
-            <label for="nome">Nome completo</label>
-            <input type="text" id="nome" required>
-        
-            <div class="linha">
-            <div>
-                <label for="telefone">Telefone</label>
-                <input type="tel" id="telefone" placeholder="(13) 99999-9999" required>
-            </div>
-            <div>
-                <label for="email">E-mail</label>
-                <input type="email" id="email" required>
-            </div>
-            </div>
-        
-            <label for="especialidade">Especialidade</label>
-            <select id="especialidade" required>
-            <option value="">Selecione...</option>
-            <option>Clínico geral</option>
-            <option>Pediatria</option>
-            <option>Cardiologia</option>
-            <option>Ortopedia</option>
-            <option>Dermatologia</option>
-            </select>
-        
-            <div class="linha">
-            <div>
-                <label for="data">Data</label>
-                <input type="date" id="data" required>
-            </div>
-            <div>
-                <label for="hora">Horário</label>
-                <select id="hora" required>
-            <option value="">--</option>
-            <option>08:00</option><option>09:00</option>
-            <option>10:00</option><option>11:00</option>
-            <option>14:00</option><option>15:00</option>
-            <option>16:00</option>
-                </select>
-            </div>
-            </div>
-        
-            <label for="obs">Observações (opcional)</label>
-            <textarea id="obs" rows="3"></textarea>
-        
-            <button type="submit" class="btn">Confirmar agendamento</button>
-        </form>
-        
-        <div class="sucesso" id="sucesso">
-            <h3>Consulta agendada!</h3>
-            <p id="resumo"></p>
-            <button class="btn" id="ok">Fechar</button>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="{% static 'images/logo-cayac.png' %}" alt="Logo Cayac Saúde" class="logo-img">
+            <span class="logo-text">Cayac <span>Saúde</span></span>
         </div>
-        </div>
-        </div>
-        
-        <script>
-        const overlay = document.getElementById('overlay');
-        const form = document.getElementById('formAgendamento');
-        const sucesso = document.getElementById('sucesso');
-        
-        function abrir() {
-        form.style.display = 'block';
-        sucesso.style.display = 'none';
-        
-        overlay.classList.add('ativo'); }
-        function fechar() { overlay.classList.remove('ativo'); }
-        
-        document.getElementById('abrir').addEventListener('click', abrir);
-        document.getElementById('fechar').addEventListener('click', fechar);
-        document.getElementById('ok').addEventListener('click', fechar);
-        overlay.addEventListener('click', e => { if (e.target === overlay) fechar(); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') fechar(); });
-        
-        // Não permite escolher datas passadas
-        const hoje = new Date().toISOString().split('T')[0];
-        document.getElementById('data').min = hoje;
-        
-        form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const dados = {
-            nome: document.getElementById('nome').value,
-            telefone: document.getElementById('telefone').value,
-            email: document.getElementById('email').value,
-            especialidade: document.getElementById('especialidade').value,
-            data: document.getElementById('data').value,
-            hora: document.getElementById('hora').value,
-            obs: document.getElementById('obs').value
-        };
-        
-          // Aqui você envia para o seu servidor/banco de dados:
-          // await fetch('/api/agendar', {
-          //   method: 'POST',
-          //   headers: { 'Content-Type': 'application/json' },
-          //   body: JSON.stringify(dados)
-          // });
-        
-        const [a, m, d] = dados.data.split('-');
-        document.getElementById('resumo').textContent =
-            `${dados.nome}, sua consulta de ${dados.especialidade} foi marcada para ${d}/${m}/${a} às ${dados.hora}.`;
-        
-        form.style.display = 'none';
-        sucesso.style.display = 'block';
-        form.reset();
-        });
-        </script>
-        </body>
-        </html>
+        <div class="user-action-buttons">
+            <a href="{% url 'pagina_login' %}" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> Sair</a>
         </div>
         
         </footer>
@@ -143,95 +40,117 @@
         
     </header>
 
-    <!-- Menu Principal -->
-    <nav class="menu-principal">
+    <!-- Navigation -->
+    <nav class="main-nav">
         <ul class="nav-links">
-            <li><a href="#">Início</a></li>
+            <li><a href="#" class="active"><i class="fas fa-home"></i> Início</a></li>
             <li class="dropdown">
-                <a href="#">Área do Paciente <i class="fas fa-chevron-down"></i></a>
+                <a href="#">Área do Paciente <i class="fas fa-chevron-down arrow-icon"></i></a>
                 <div class="dropdown-content">
                     <a href="#">Meu Prontuário</a>
                     <a href="#">Agendamentos</a>
                     <a href="#">Receitas e Medicamentos</a>
                     <a href="#">Telemedicina</a>
-                    <a href="#">Página de Saúde</a>
                 </div>
             </li>
             <li class="dropdown">
-                <a href="#">Área Médica <i class="fas fa-chevron-down"></i></a>
+                <a href="#">Rede de Atendimento <i class="fas fa-chevron-down arrow-icon"></i></a>
                 <div class="dropdown-content">
-                    <a href="#">Dashboard Profissional</a>
-                    <a href="#">Exames e Laudos</a>
-                    <a href="#">Educação Continuada</a>
-                    <a href="#">Pesquisa Clínica</a>
-                </div>
-            </li>
-            <li><a href="#">Institucional</a></li>
-            <li class="dropdown">
-                <a href="#">Serviços <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-content">
-                    <a href="#">Clínicas e Departamentos</a>
-                    <a href="#">Serviços de Apoio</a>
-                    <a href="#">Emergência</a>
-                    <a href="#">Exames e Procedimentos</a>
+                    <a href="#">Hospitais Parceiros</a>
+                    <a href="#">Clínicas e Especialidades</a>
+                    <a href="#">Pronto Atendimento</a>
                 </div>
             </li>
             <li><a href="#">Contato</a></li>
         </ul>
     </nav>
 
-    <!-- Conteúdo do Perfil -->
+    <!-- Main Container -->
     <div class="perfil-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <h3>Meu Perfil</h3>
-            <ul>
-                <li><a href="#" class="active">Informações</a></li>
-                <li><a href="#">Meu Prontuário</a></li>
-                <li><a href="#">Agendamentos</a></li>
-                <li><a href="#">Receitas</a></li>
-                <li><a href="#">Exames</a></li>
-                <li><a href="#">Mensagens</a></li>
-                <li><a href="#">Configurações</a></li>
+            <div class="user-profile-summary">
+                <div class="avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h4>Minha Conta</h4>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-chart-line"></i>Meu Perfil</a></li>
+                <li><a href="#"><i class="fas fa-file-medical"></i>Meu Prontuário</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i>Agendamentos</a></li>
+                <li><a href="#"><i class="fas fa-user-edit"></i> Atualizar Endereço</a></li>
+                <li><a href="#"><i class="fas fa-pills"></i> Receitas</a></li>
+                <li><a href="#"><i class="fas fa-notes-medical"></i> Exames</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Configurações</a></li>
             </ul>
         </aside>
 
-        <!-- Conteúdo Principal -->
+        <!-- Main Content -->
         <main class="conteudo-perfil">
-          
-            <section id="servicos" class="section-padding">
-                <div class="container">
-                    <h2 class="text-center">Unidades Parceiras</h2>
-                    <div class="servicos-grid">
-                        <div class="card-servico">
-                            <img src="../static/imagens/FachadaSantaCasa.jpeg" alt="Santa Casa">
-                            <h3>Santa Casa</h3>
-                            <p>Avenida Doutor Cláudio Luiz da Costa, número 50, no bairro Jabaquara, Santos (CEP 11075-900).</p>
+            <div class="page-header">
+                <h2>Atualização de Endereço</h2>
+                <p>Preencha ou atualize seus dados cadastrais para facilitar o agendamento de consultas e atendimento na rede.</p>
+            </div>
+
+            <!-- Formulário de Cadastro / Endereço com CEP Automático -->
+            <div class="card-form-container">
+                <form id="form-cadastro">
+                    <div class="form-grid">
+                        
+                        <div class="form-group">
+                            <label for="cep">CEP</label>
+                            <input type="text" id="cep" placeholder="Digite apenas números" maxlength="8" required>
                         </div>
-                        <div class="card-servico">
-                            <img src="../static/imagens/HospitalAnaCosta.jpeg" alt="Ana Costa">
-                            <h3>Ana Costa</h3>
-                            <p>Rua Pedro Américo, 60, no bairro do Campo Grande, Santos (SP).</p>
+
+                        <div class="form-group full-width">
+                            <label for="rua">Rua</label>
+                            <input type="text" id="rua" placeholder="Preenchido automaticamente pelo CEP" required>
                         </div>
-                        <div class="card-servico">
-                            <img src="../static/imagens/HospitalMontSerrat.jpg" alt="Mont Serrat">
-                            <h3>Mont Serrat</h3>
-                            <p>Praça Correia de Mello, nº 33, Centro Histórico, Santos - SP.</p>
+
+                        <div class="form-group">
+                            <label for="numero">Número</label>
+                            <input type="text" id="numero" placeholder="Ex: 123" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bairro">Bairro</label>
+                            <input type="text" id="bairro" placeholder="Preenchido automaticamente" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cidade">Cidade</label>
+                            <input type="text" id="cidade" placeholder="Preenchido automaticamente" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="uf">UF</label>
+                            <input type="text" id="uf" placeholder="UF" maxlength="2" required>
                         </div>
                     </div>
-                </div>
-            </section>
-        <div class="redes-sociais">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-acao">Salvar Alterações</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="redes-sociais">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2026 Cayac Saúde — Agendamento & Rede de Hospitais. Todos os direitos reservados.</p>
         </div>
-        <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agendamento de consultas</title>
-<style>
- 
+    </footer>
+
+    <!-- JavaScript Externo -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
