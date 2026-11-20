@@ -14,7 +14,10 @@
     <header>
         <div class="container menu-container">
             <div class="logo">
-                <h2>Hospital <span><a href="{% url 'home_publica' %}"><img class="icone" src="{% static 'imagens/icone.png' %}" alt="logohospital"></a></span></h2>
+                <a href="{% url 'home_publica' %}" class="logo-link">
+                    <img class="logo-img" src="{% static 'imagens/Logo_CAYAC.png' %}" alt="Logo Cayac Saúde">
+                    <h2>Hospital <span>Cayac</span></h2>
+                </a>
             </div>
             <nav>
                 <ul>

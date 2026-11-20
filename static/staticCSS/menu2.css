@@ -141,28 +141,7 @@ body {
     display: block;
 }
 
-<<<<<<< HEAD
-/* Botão de login/cadastro */
-.auth-buttons {
-    display: flex;
-    gap: 1rem;
-}
-
-.btn {
-    padding: 0.5rem 1.5rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s;
-    border: none;
-    cursor: pointer;
-}
-
-
-/* Conteúdo do perfil */
-=======
 /* Container */
->>>>>>> front1
 .perfil-container {
     max-width: 1280px;
     width: 100%;
@@ -366,99 +345,7 @@ body {
     .form-grid {
         grid-template-columns: 1fr;
     }
-<<<<<<< HEAD
-}
-/* ==========================================
-    SEÇÃO UNIDADES PARCEIRAS (CARDS)
-   ========================================== */
-   .servicos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.card-servico {
-    background-color: var(--branco);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid var(--borda);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-servico:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.card-servico img {
-    width: 50%;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.card-servico h3 {
-    color: var(--azul-escuro);
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-}
-
-.card-servico p {
-    color: var(--texto-escuro);
-    font-size: 0.95rem;
-}
-* { box-sizing: border-box; }
-body { font-family: Arial, sans-serif; padding: 40px; }
-
-.btn {
-  background: #0a7d6e; color: #fff; border: none;
-  padding: 12px 22px; border-radius: 8px;
-  font-size: 16px; cursor: pointer;
-}
-.btn:hover { background: #086558; }
-
-.overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,.6);
-  justify-content: center; align-items: center;
-  z-index: 1000; padding: 16px; overflow-y: auto;
-}
-.overlay.ativo { display: flex; }
-
-.popup {
-  background: #fff; border-radius: 12px; padding: 28px;
-  width: 100%; max-width: 440px; position: relative;
-  box-shadow: 0 10px 30px rgba(0,0,0,.3);
-  max-height: 95vh; overflow-y: auto;
-}
-.fechar {
-  position: absolute; top: 10px; right: 14px;
-  background: none; border: none; font-size: 26px; cursor: pointer;
-}
-.popup h2 { margin: 0 0 16px; color: #0a7d6e; }
-
-label { display: block; margin: 12px 0 4px; font-size: 14px; font-weight: bold; }
-input, select, textarea {
-  width: 100%; padding: 10px; font-size: 15px;
-  border: 1px solid #ccc; border-radius: 6px;
-}
-input:focus, select:focus, textarea:focus { outline: 2px solid #0a7d6e; border-color: transparent; }
-.linha { display: flex; gap: 10px; }
-.linha > div { flex: 1; }
-.popup .btn { width: 100%; margin-top: 18px; }
-
-.sucesso { display: none; text-align: center; padding: 20px 0; }
-.sucesso h3 { color: #0a7d6e; }
-</style>
-</head>
-<body>
-
-=======
     .form-group.full-width {
         grid-column: span 1;
     }
 }
->>>>>>> front1
