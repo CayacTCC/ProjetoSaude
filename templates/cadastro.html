@@ -10,29 +10,34 @@
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="logo">
-            <i class="fa-solid fa-hospital-user"></i> Hospital <span>+</span>
+    <header>
+        <div class="container menu-container">
+            <div class="logo-header">
+                <a href="{% url 'home_publica' %}" class="logo-link">
+                    <img class="logo-img" src="{% static 'imagens/Logo_CAYAC.png' %}" alt="Logo Cayac Saúde">
+                    <h2>Cayac <span>Saúde</span></h2>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'pagina_login' %}">Entrar</a></li>
+                    <li><a href="{% url 'home_publica' %}#servicos">Serviços</a></li>
+                    <li><a href="{% url 'home_publica' %}#contato">Contato</a></li>
+                </ul>
+            </nav> 
         </div>
-        <nav>
-            <a href="#">Entrar</a>
-            <a href="#">Serviços</a>
-            <a href="#">Contato</a>
-        </nav>
     </header>
     
-    <div class="form-container"> <!-- só o form fica centralizado -->
+    <div class="form-container">
         <div class="card"> 
-            <!-- seu form do CAYAC aqui -->
+            
         </div>
     </div>
 
     <main class="main-container">
         <div class="card-cadastro">
             
-            <div class="card-icon">
-                <i class="fa-solid fa-user"></i>
-            </div>
+            <img src="{% static 'imagens/Logo_CAYAC.png' %}" alt="Logo Cayac Saúde" class="cadastro-logo-img">
 
             <h2>Criar Conta</h2>
             <p class="subtitle">Cuidando da sua saúde em todos os momentos</p>
