@@ -10,28 +10,29 @@
 </head>
 <body>
 
-    <!-- Cabeçalho / Navbar inspirada no modelo do Hospital -->
-    <header class="navbar">
-        <div class="logo">
-            <i class="fa-solid fa-hospital-user"></i> Hospital <span>+</span>
+    <header>
+        <div class="container menu-container">
+            <div class="logo-header">
+                <a href="{% url 'home_publica' %}" class="logo-link">
+                    <img class="logo-img" src="{% static 'imagens/Logo_CAYAC.png' %}" alt="Logo Cayac Saúde">
+                    <h2>Cayac <span>Saúde</span></h2>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home_publica' %}">Início</a></li>
+                    <li><a href="{% url 'home_publica' %}#servicos">Serviços</a></li>
+                    <li><a href="{% url 'home_publica' %}#contato">Contato</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav>
-            <a href="#">Entrar</a>
-            <a href="#">Serviços</a>
-            <a href="#">Contato</a>
-        </nav>
     </header>
 
     <!-- Container responsável por centralizar o formulário na tela abaixo do navbar -->
     <div class="form-container">
         <div class="login-container">
-            <!-- Logo -->
-            <div class="logo-title-container">
-            
-            </div>
+            <img src="{% static 'imagens/Logo_CAYAC.png' %}" alt="Logo Cayac Saúde" class="login-logo-img">
             <h1 class="main-heading">CAYAC</h1>
-            <div class="logo">C</div> 
-            <!-- Título Principal -->
             <p class="sub-heading">Venha nos conhecer</p>
 
             <!-- Formulário de LOGIN -->
