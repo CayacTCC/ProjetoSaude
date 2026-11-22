@@ -9,3 +9,4 @@ ProjetoSaude\pacientes\migrations\__pycache__
 dados_hospital.json
 exames_novos.json
 info_hospitais.json
+gera_json.py
