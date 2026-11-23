@@ -16,7 +16,6 @@ def criar_agendamento(request, hospital_id=None):
         hospital_fixo = get_object_or_404(Hospital, id=hospital_id)
 
     if request.method == "POST":
-        # Se veio hospital_id na URL, usa ele; se não, pega o que o usuário escolheu no form
         id_escolhido = hospital_id or request.POST.get('hospital_id')
         hospital = get_object_or_404(Hospital, id=id_escolhido)
 
@@ -42,3 +41,23 @@ def criar_agendamento(request, hospital_id=None):
         'hospital': hospital_fixo,
         'hospitais': hospitais,
     })
+
+
+@login_required(login_url='pagina_login')
+def minhas_consultas(request):
+    paciente = get_object_or_404(Paciente, usuario=request.user)
+    consultas = Agendamento.objects.filter(paciente=paciente)
+    return render(request, 'FantasmaDoMinhasConsultas.html', {'consultas': consultas})
+
+
+@login_required(login_url='pagina_login')
+def cancelar_agendamento(request, agendamento_id):
+    paciente = get_object_or_404(Paciente, usuario=request.user)
+    agendamento = get_object_or_404(Agendamento, id=agendamento_id, paciente=paciente)
+
+    if request.method == "POST":
+        agendamento.status = 'CANCELADO'
+        agendamento.save()
+        messages.success(request, "Agendamento cancelado com sucesso!")
+
+    return redirect('minhas_consultas')
