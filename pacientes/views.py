@@ -103,4 +103,6 @@ def cadastro_enderecoP(request):
 
 @login_required(login_url='pagina_login')
 def perfil_view(request):
+
+    
     return render (request, 'pagina_usuario.html') 

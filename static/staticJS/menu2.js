@@ -12,6 +12,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Navegação entre seções
+    const linksSecao = document.querySelectorAll('[data-secao]');
+    const secoesPainel = document.querySelectorAll('.secao-painel');
+    const linksSidebar = document.querySelectorAll('.sidebar-menu a');
+
+    function ativarSecao(nomeSecao) {
+        secoesPainel.forEach(secao => {
+            secao.classList.toggle('ativa', secao.id === `sec-${nomeSecao}`);
+        });
+
+        linksSidebar.forEach(link => {
+            link.classList.toggle('active', link.dataset.secao === nomeSecao);
+        });
+    }
+
+    linksSecao.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const secaoAlvo = link.dataset.secao;
+            if (secaoAlvo) {
+                e.preventDefault();
+                ativarSecao(secaoAlvo);
+            }
+        });
+    });
+
     // ==========================================
     // PREENCHIMENTO AUTOMÁTICO DE ENDEREÇO (VIA CEP)
     // ==========================================
