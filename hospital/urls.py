@@ -1,9 +1,9 @@
 from django.urls import path
 from . import views
 
+app_name = 'hospital'
+
 urlpatterns = [
-    path('agendar/', views.criar_agendamento, name='criar_agendamento_sem_hospital'),
-    path('agendar/<int:hospital_id>/', views.criar_agendamento, name='criar_agendamento'),
-    path('minhas-consultas/', views.minhas_consultas, name='minhas_consultas'),
-    path('cancelar/<int:agendamento_id>/', views.cancelar_agendamento, name='cancelar_agendamento'),
+    path('proximos/', views.listar_hospitais_perto, name='listar_proximos'),
+    path('<int:pk>/', views.detalhe_hospital, name='detalhe_hospital'),
 ]
