@@ -43,6 +43,14 @@ class ExameEspecifico(models.Model):
 
 class Hospital(models.Model):
     nome = models.CharField(max_length=150)
+    descricao = models.TextField(blank=True, null=True, verbose_name="Descrição")
+    imagem = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        verbose_name="Imagem",
+        help_text="Ex: imagens/FachadaSantaCasa.jpeg (dentro de static/)"
+    )
     endereco = models.CharField(max_length=255)
     cidade = models.CharField(max_length=100, help_text="Ex: Santos, Guarujá, São Vicente...")
     cep = models.CharField(max_length=9, blank=True, null=True)
