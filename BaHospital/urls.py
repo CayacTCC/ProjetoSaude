@@ -28,5 +28,6 @@ urlpatterns = [
     path('perfil/', views.perfil_view, name='perfil_usuario'),
     path('agendamentos/', include('agendamentos.urls')),
     path('buscar/', include('buscar.urls')),
+    path('hospitais/', include('hospital.urls'))
     
 ]

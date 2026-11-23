@@ -5,39 +5,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil e Cadastro - Cayac Saúde</title>
+    <title>Minha Conta - Cayac Saúde</title>
     <link rel="stylesheet" href="{% static 'staticCSS/menu2.css' %}">
-    <script src="menu2.js" defer></script>
-    
+    <script src="{% static 'js/main.js' %}" defer></script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- CSS Externo -->
-
 </head>
 <body>
 
     <!-- Header -->
     <header class="header">
         <div class="logo-container">
-            <img src="{% static 'imagens/Logo_CAYAC.png' %}" alt="LogoCayacSaúde" class="logo-img">
+            <img src="{% static 'imagens/Logo_CAYAC.png' %}" alt="Logo Cayac Saúde" class="logo-img">
             <span class="logo-text">Cayac <span>Saúde</span></span>
         </div>
         <div class="user-action-buttons">
             <a href="{% url 'pagina_login' %}" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> Sair</a>
         </div>
-        
-        </footer>
-        </body>
-        </html>
-        
-        
     </header>
 
     <!-- Navigation -->
@@ -47,10 +37,10 @@
             <li class="dropdown">
                 <a href="#">Área do Paciente <i class="fas fa-chevron-down arrow-icon"></i></a>
                 <div class="dropdown-content">
-                    <a href="#">Meu Prontuário</a>
-                    <a href="#">Agendamentos</a>
-                    <a href="#">Receitas e Medicamentos</a>
-                    <a href="#">Telemedicina</a>
+                    <a href="#prontuario" data-secao="prontuario">Meu Prontuário</a>
+                    <a href="#agendamentos" data-secao="agendamentos">Agendamentos</a>
+                    <a href="#receitas" data-secao="receitas">Receitas e Medicamentos</a>
+                    <a href="{% url 'perfil_usuario' %}" data-secao="minha-conta">Minha Conta</a>
                 </div>
             </li>
             <li class="dropdown">
@@ -61,90 +51,7 @@
                     <a href="#">Pronto Atendimento</a>
                 </div>
             </li>
-            <li><a href="#">Contato</a></li>
         </ul>
     </nav>
 
-    <!-- Main Container -->
-    <div class="perfil-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="user-profile-summary">
-                <div class="avatar">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-                <h4>Minha Conta</h4>
-            </div>
-            <ul class="sidebar-menu">
-                <li><a href="#" class="active"><i class="fas fa-chart-line"></i>Meu Perfil</a></li>
-                <li><a href="#"><i class="fas fa-file-medical"></i>Meu Prontuário</a></li>
-                <li><a href="#"><i class="fas fa-calendar-alt"></i>Agendamentos</a></li>
-                <li><a href="#"><i class="fas fa-user-edit"></i> Atualizar Endereço</a></li>
-                <li><a href="#"><i class="fas fa-pills"></i> Receitas</a></li>
-                <li><a href="#"><i class="fas fa-notes-medical"></i> Exames</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Configurações</a></li>
-            </ul>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="conteudo-perfil">
-            <div class="page-header">
-                <h2>Atualização de Endereço</h2>
-                <p>Preencha ou atualize seus dados cadastrais para facilitar o agendamento de consultas e atendimento na rede.</p>
-            </div>
-
-            <!-- Formulário de Cadastro / Endereço com CEP Automático -->
-            <div class="card-form-container">
-                <form id="form-cadastro">
-                    <div class="form-grid">
-                        
-                        <div class="form-group">
-                            <label for="cep">CEP</label>
-                            <input type="text" id="cep" placeholder="Digite apenas números" maxlength="8" required>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="rua">Rua</label>
-                            <input type="text" id="rua" placeholder="Preenchido automaticamente pelo CEP" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="numero">Número</label>
-                            <input type="text" id="numero" placeholder="Ex: 123" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="bairro">Bairro</label>
-                            <input type="text" id="bairro" placeholder="Preenchido automaticamente" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="cidade">Cidade</label>
-                            <input type="text" id="cidade" placeholder="Preenchido automaticamente" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="uf">UF</label>
-                            <input type="text" id="uf" placeholder="UF" maxlength="2" required>
-                        </div>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn-acao">Salvar Alterações</button>
-                    </div>
-                </form>
-            </div>
-        </main>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2026 Cayac Saúde — Agendamento & Rede de Hospitais. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- JavaScript Externo -->
-    <script src="{% static 'js/main.js' %}"></script>
-</body>
-</html>
+   
