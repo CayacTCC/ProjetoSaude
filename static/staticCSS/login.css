@@ -2,33 +2,30 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
     background-color: #015C92;
-    margin: 0;
+    background: linear-gradient(135deg, rgba(0, 91, 148, 0.9), rgba(0, 59, 102, 0.85)),
+                url("../imagens/Recepcao.jpg") no-repeat center center/cover;
+    min-height: 100vh;
     padding-top: 80px; /* espaço do navbar fixo */
-    font-family: Arial, sans-serif;
 }
 
-/* Container novo só pro form centralizar */
+/* Container do formulário centralizado */
 .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 90px); /* 100vh menos altura do navbar */
+    width: 100%;
+    min-height: calc(100vh - 80px); /* 100vh menos altura do navbar */
+    padding: 20px;
 }
 
-.navbar {
+header {
     background-color: #ffffff;
-    display: flex;
-    justify-content: space-between; /* logo de um lado, menu do outro */
-    align-items: center;
-    padding: 15px 50px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
-    /* Isso aqui que joga pro topo */
+    box-shadow: 0 4px 15px rgba(0, 91, 148, 0.08);
     position: fixed;
     top: 0;
     left: 0;
@@ -36,76 +33,86 @@ body {
     z-index: 1000;
 }
 
-/* Estilo pros links do menu */
-.navbar nav a {
-    margin-left: 40px;
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     text-decoration: none;
-    color: #333;
-    font-weight: 500;
 }
 
-.navbar .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #015C92; /* azul do seu fundo */
+.logo-img {
+    height: 45px;
+    width: auto;
+    display: block;
 }
 
-.navbar .logo span {
-    color: #6a0dad; /* roxo do + */
+.logo-header h2 {
+    color: #005b94;
+    font-size: 1.6rem;
+    margin: 0;
 }
 
-/* Quadradinho */
+.logo-header span {
+    color: #00a896;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav ul a {
+    text-decoration: none;
+    color: #334155;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav ul a:hover {
+    color: #005b94;
+}
+
+/* CARD DE LOGIN */
 .login-container {
     background-color: #b2e3fc;
-    padding: 14px;
+    padding: 20px;
     border-radius: 8px;
-    width: 320px;
+    width: 100%;
+    max-width: 340px;
     text-align: center;
 }
 
-/* Logo e título lado a lado */
-.logo-tit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px; /* Reduzido para caber nos 320px de largura */
-    margin: 20px auto 24px auto; /* Sintaxe de margem corrigida */
-}
-
-.logo {
-    background-color: #401a8b;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #ffffff;
-    flex-shrink: 0; /* Impede que a logo encolha */
-}
-
-.logo-text {
-    color: rgb(0, 0, 0);
-    font-size: 15px;
-    font-family: cursive;
+/* LOGO DENTRO DO CARD DE LOGIN */
+.login-logo-img {
+    height: 65px;
+    width: auto;
+    margin: 10px auto;
+    display: block;
 }
 
 /* Título */
 .main-heading {
-    color: #090807;
-    font-size: 24px;
-    font-family: cursive;
-    position: relative; 
-    top: 35px;
-    margin-right: 25px;
+    position: static;
+    margin: 5px 0 8px 0;
+    font-size: 1.5rem;
 }
 
 .sub-heading {
-    color: rgba(9, 4, 4, 0.7);
-    font-size: 20px;
-    margin-bottom: 24px;
+    margin: 0 0 15px 0;
 }
 
 .input-field {
@@ -120,15 +127,15 @@ body {
 
 .login-button {
     width: 100%;
-    padding: 20px;
+    padding: 14px;
     background-color: #468cb8;
     border: none;
     border-radius: 6px;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .divider {
@@ -153,16 +160,16 @@ body {
 
 .social-buttons {
     display: flex;
-    gap: 20px;
-    margin-bottom: 24px;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
 .social-button {
     flex: 1;
-    padding: 20px;
+    padding: 12px;
     border: none;
     border-radius: 6px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -171,10 +178,7 @@ body {
 .fb-button {
     background-color: #69c2f9;
 }
-.Cadastre-se-link{
 
-font-size:21px;
-
-
-
+.Cadastre-se-link {
+    font-size: 16px;
 }
