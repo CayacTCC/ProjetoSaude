@@ -20,12 +20,6 @@
             <a href="#">Contato</a>
         </nav>
     </header>
-    
-    <div class="form-container"> <!-- só o form fica centralizado -->
-        <div class="card"> 
-            <!-- seu form do CAYAC aqui -->
-        </div>
-    </div>
 
     <main class="main-container">
         <div class="card-cadastro">
@@ -50,6 +44,30 @@
                     <input type="text" id="cpf" name="cpf" placeholder="CPF" required>
                 </div>
 
+                <!-- 1. CAMPO CEP ADICIONADO AQUI -->
+                <div class="input-group">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <input type="text" id="id_cep" name="cep" placeholder="CEP (Apenas números)" maxlength="9" required>
+                </div>
+
+                <!-- 2. CAMPO RUA ADICIONADO AQUI -->
+                <div class="input-group">
+                    <i class="fa-solid fa-road"></i>
+                    <input type="text" id="id_rua" name="rua" placeholder="Rua / Logradouro" required>
+                </div>
+
+                <!-- 3. CAMPO BAIRRO ADICIONADO AQUI -->
+                <div class="input-group">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <input type="text" id="id_bairro" name="bairro" placeholder="Bairro" required>
+                </div>
+
+                <!-- 4. CAMPO CIDADE ADICIONADO AQUI -->
+                <div class="input-group">
+                    <i class="fa-solid fa-city"></i>
+                    <input type="text" id="id_cidade" name="cidade" placeholder="Cidade" required>
+                </div>
+
                 <div class="input-group">
                     <i class="fa-regular fa-envelope"></i>
                     <input type="email" id="email" name="email" placeholder="E-mail" required>
@@ -67,14 +85,50 @@
                 </div>
 
                 <p class="login-link">
-                    Já tem uma conta? <a href= "{% url 'pagina_login' %}" >Faça login</a>
+                    Já tem uma conta? <a href="{% url 'pagina_login' %}">Faça login</a>
                 </p>
-
 
             </form>
 
         </div>
     </main>
+
+    <!-- ========================================== -->
+    <!-- SCRIPT DO VIACEP ADICIONADO AQUI NO FINAL -->
+    <!-- ========================================== -->
+    <script>
+        const inputCep = document.getElementById('id_cep');
+
+        inputCep.addEventListener('blur', function() {
+            let cep = inputCep.value.replace(/\D/g, '');
+
+            if (cep.length === 8) {
+                let url = `https://viacep.com.br/ws/${cep}/json/`;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            document.getElementById('id_rua').value = data.logradouro;
+                            document.getElementById('id_bairro').value = data.bairro;
+                            document.getElementById('id_cidade').value = data.localidade;
+                        } else {
+                            alert('CEP não encontrado.');
+                            limparCampos();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao buscar o CEP:', error);
+                    });
+            }
+        });
+
+        function limparCampos() {
+            document.getElementById('id_rua').value = '';
+            document.getElementById('id_bairro').value = '';
+            document.getElementById('id_cidade').value = '';
+        }
+    </script>
 
 </body>
 </html>
