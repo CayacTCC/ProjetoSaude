@@ -35,13 +35,8 @@
         <ul class="nav-links">
             <li><a href="#" class="active"><i class="fas fa-home"></i> Início</a></li>
             <li class="dropdown">
-                <a href="#">Área do Paciente <i class="fas fa-chevron-down arrow-icon"></i></a>
-                <div class="dropdown-content">
-                    <a href="#prontuario" data-secao="prontuario">Meu Prontuário</a>
-                    <a href="#agendamentos" data-secao="agendamentos">Agendamentos</a>
-                    <a href="#receitas" data-secao="receitas">Receitas e Medicamentos</a>
-                    <a href="{% url 'perfil_usuario' %}" data-secao="minha-conta">Minha Conta</a>
-                </div>
+                <a href="{% url 'perfil_usuario' %}">Área do Paciente </a>
+               
             </li>
             <li class="dropdown">
                 <a href="#">Rede de Atendimento <i class="fas fa-chevron-down arrow-icon"></i></a>
