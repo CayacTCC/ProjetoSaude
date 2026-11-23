@@ -1,4 +1,4 @@
-   * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -7,6 +7,8 @@
 
 body {
     background-color: #005b96;
+    background: linear-gradient(135deg, rgba(0, 91, 148, 0.9), rgba(0, 59, 102, 0.85)),
+                url("../imagens/Recepcao.jpg") no-repeat center center/cover;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -31,7 +33,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 14px 0;
 }
 
 .logo-link {
@@ -73,8 +75,9 @@ nav ul a {
 nav ul a:hover {
     color: #005b94;
 }
+
 /* ===================================
-    3. Container de Cadastro
+3. Container de Cadastro
    =================================== */
 .main-container {
     flex: 1;
@@ -82,6 +85,7 @@ nav ul a:hover {
     justify-content: center;
     align-items: center;
     padding: 40px 20px;
+    width: 100%;
 }
 
 .card-cadastro {
@@ -113,8 +117,9 @@ nav ul a:hover {
     font-size: 0.85rem;
     margin-bottom: 25px;
 }
+
 /* ===================================
-    4. Formulário e Campos de Entrada
+4. Formulário e Campos de Entrada
    =================================== */
 .form-cadastro {
     display: flex;
@@ -152,10 +157,10 @@ nav ul a:hover {
 }
 
 /* ===================================
-    5. Botões e Divisor
+5. Botões e Divisor
    =================================== */
 .btn-submit {
-    background-color: #4882a8; /* Tom azul do botão central */
+    background-color: #4882a8;
     color: #ffffff;
     border: none;
     padding: 12px;
