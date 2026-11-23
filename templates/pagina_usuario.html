@@ -235,19 +235,81 @@
                 </div>
             </section>
 
-            <!-- MINHA CONTA -->
-            <section id="sec-minha-conta" class="secao-painel">
-                <div class="page-header">
-                    <h2>Minha Conta</h2>
-                    <p>Visualize os dados gerais da sua conta na Cayac Saúde e acesse seus atalhos rápidos.</p>
-                </div>
+<!-- MINHA CONTA -->
+<section id="sec-minha-conta" class="secao-painel">
+    <div class="page-header">
+        <h2>Minha Conta</h2>
+        <p>Visualize os dados gerais da sua conta na Cayac Saúde e acesse seus atalhos rápidos.</p>
+    </div>
 
-                <div class="card-form-container">
-                    <div class="info-lista">
-                        <div class="info-item">
-                            <span class="info-label">Status da Conta</span>
-                            <span class="info-valor">Ativa</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Acesso Rápido</span>
-                            <span class="info-valor">Use o menu lateral para acessar Atualização de Endereço, Meu Pront
+    <div class="card-form-container">
+        <div class="info-lista">
+            <div class="info-item">
+                <span class="info-label">Status da Conta</span>
+                <span class="info-valor">Ativa</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Acesso Rápido</span>
+                <span class="info-valor">Use o menu lateral para acessar Atualização de Endereço, Meu Prontuário, Agendamentos, Receitas e Exames.</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+<div class="footer-content">
+<div class="redes-sociais">
+    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+</div>
+<p>&copy; 2026 Cayac Saúde — Agendamento & Rede de Hospitais. Todos os direitos reservados.</p>
+</div>
+</footer>
+
+<!-- Script do ViaCEP -->
+<script>
+const inputCep = document.getElementById('cep');
+
+if (inputCep) {
+inputCep.addEventListener('blur', function () {
+    const cep = inputCep.value.replace(/\D/g, '');
+
+    if (cep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.erro) {
+                    document.getElementById('rua').value = data.logradouro || '';
+                    document.getElementById('bairro').value = data.bairro || '';
+                    document.getElementById('cidade').value = data.localidade || '';
+                    document.getElementById('uf').value = data.uf || '';
+                } else {
+                    alert('CEP não encontrado.');
+                    limparCamposEndereco();
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o CEP:', error);
+            });
+    } else if (cep.length > 0) {
+        alert('Digite um CEP válido com 8 números.');
+        limparCamposEndereco();
+    }
+});
+}
+
+function limparCamposEndereco() {
+document.getElementById('rua').value = '';
+document.getElementById('bairro').value = '';
+document.getElementById('cidade').value = '';
+document.getElementById('uf').value = '';
+}
+</script>
+</body>
+</html>
