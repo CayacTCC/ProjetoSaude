@@ -156,6 +156,14 @@ nav ul a:hover {
     box-shadow: 0 0 0 3px rgba(0, 91, 150, 0.15);
 }
 
+.erro-cpf,
+.erro-email {
+    color: #c53030;
+    font-size: 0.82rem;
+    text-align: left;
+    margin-top: -8px;
+}
+
 /* ===================================
 5. Botões e Divisor
    =================================== */
