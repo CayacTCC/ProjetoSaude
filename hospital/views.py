@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
@@ -34,4 +34,17 @@ def listar_hospitais_perto(request):
     return render(request, 'arquivo_fantasma.html', {
         'hospitais_com_distancia': lista_ordenada,
         'paciente': paciente
+    })
+
+@login_required(login_url='pagina_login')
+def detalhe_hospital(request, pk):
+    hospital = get_object_or_404(
+        Hospital.objects.prefetch_related(
+            'planos aceitos',
+            'exames_disponiveis__exame_base__tipo'
+        ),
+        pk=pk,
+    )
+    return render (request, 'hospital/detalhe_hospital.html',{
+        'hospital': hospital,
     })
