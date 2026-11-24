@@ -152,6 +152,11 @@ body {
   flex: 1;
 }
 
+/* Radio de controle das seções (CSS puro) */
+.secao-radio {
+  display: none;
+}
+
 /* Sidebar */
 .sidebar {
   width: 260px;
@@ -190,35 +195,44 @@ body {
   margin-bottom: 0.3rem;
 }
 
-.sidebar-menu a {
+.sidebar-menu label {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 0.75rem 1rem;
-  text-decoration: none;
   color: var(--text-color);
   border-radius: 8px;
   font-size: 0.92rem;
   font-weight: 500;
+  cursor: pointer;
   transition: all 0.2s;
 }
 
-.sidebar-menu a i {
+.sidebar-menu label i {
   width: 20px;
   color: var(--primary-color);
 }
 
-.sidebar-menu a:hover {
+.sidebar-menu label:hover {
   background-color: var(--bg-color);
   color: var(--primary-color);
 }
 
-.sidebar-menu a.active {
+/* Estado ativo do label conforme o radio selecionado */
+#tab-prontuario:checked ~ .sidebar label[for="tab-prontuario"],
+#tab-receitas:checked ~ .sidebar label[for="tab-receitas"],
+#tab-exames:checked ~ .sidebar label[for="tab-exames"],
+#tab-agendamentos:checked ~ .sidebar label[for="tab-agendamentos"],
+#tab-atualizar-endereco:checked ~ .sidebar label[for="tab-atualizar-endereco"] {
   background-color: var(--primary-color);
   color: #ffffff;
 }
 
-.sidebar-menu a.active i {
+#tab-prontuario:checked ~ .sidebar label[for="tab-prontuario"] i,
+#tab-receitas:checked ~ .sidebar label[for="tab-receitas"] i,
+#tab-exames:checked ~ .sidebar label[for="tab-exames"] i,
+#tab-agendamentos:checked ~ .sidebar label[for="tab-agendamentos"] i,
+#tab-atualizar-endereco:checked ~ .sidebar label[for="tab-atualizar-endereco"] i {
   color: #ffffff;
 }
 
@@ -231,7 +245,12 @@ body {
   display: none;
 }
 
-.secao-painel.ativa {
+/* Mostrar seção correspondente ao radio selecionado */
+#tab-prontuario:checked ~ .conteudo-perfil #sec-prontuario,
+#tab-receitas:checked ~ .conteudo-perfil #sec-receitas,
+#tab-exames:checked ~ .conteudo-perfil #sec-exames,
+#tab-agendamentos:checked ~ .conteudo-perfil #sec-agendamentos,
+#tab-atualizar-endereco:checked ~ .conteudo-perfil #sec-atualizar-endereco {
   display: block;
 }
 
@@ -302,6 +321,12 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1rem 1.25rem;
+}
+
+.registro-card p {
+  font-size: 0.92rem;
+  color: var(--text-color);
+  margin-top: 0.25rem;
 }
 
 .registro-topo {
@@ -430,17 +455,17 @@ body {
 /* Responsividade */
 @media (max-width: 850px) {
   .perfil-container {
-      flex-direction: column;
+    flex-direction: column;
   }
   .sidebar {
-      width: 100%;
+    width: 100%;
   }
   .form-grid,
   .info-grid {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
   .form-group.full-width,
   .info-box.full-width {
-      grid-column: span 1;
+    grid-column: span 1;
   }
 }

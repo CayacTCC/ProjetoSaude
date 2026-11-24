@@ -35,8 +35,7 @@
         <ul class="nav-links">
             <li><a href="{% url 'home_privada' %}" class="active"><i class="fas fa-home"></i> Início</a></li>
             <li class="dropdown">
-                <a href="{% url 'perfil_usuario' %}">Área do Paciente </a>
-               
+                <a href="{% url 'perfil_usuario' %}">Área do Paciente</a>
             </li>
             <li class="dropdown">
                 <a href="#">Rede de Atendimento <i class="fas fa-chevron-down arrow-icon"></i></a>
@@ -51,6 +50,14 @@
 
     <!-- Main Container -->
     <div class="perfil-container">
+
+        <!-- Inputs de controle das seções (sem JS para troca de abas) -->
+        <input type="radio" name="menu-secao" id="tab-prontuario" class="secao-radio" checked>
+        <input type="radio" name="menu-secao" id="tab-receitas" class="secao-radio">
+        <input type="radio" name="menu-secao" id="tab-exames" class="secao-radio">
+        <input type="radio" name="menu-secao" id="tab-agendamentos" class="secao-radio">
+        <input type="radio" name="menu-secao" id="tab-atualizar-endereco" class="secao-radio">
+
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="user-profile-summary">
@@ -60,66 +67,16 @@
                 <h4>Minha Conta</h4>
             </div>
             <ul class="sidebar-menu">
-                <li><a href="#prontuario" data-secao="prontuario"><i class="fas fa-file-medical"></i> Meu Prontuário</a></li>
-                <li><a href="#agendamentos" data-secao="agendamentos"><i class="fas fa-calendar-alt"></i> Agendamentos</a></li>
-                <li><a href="#atualizar-endereco" data-secao="atualizar-endereco" class="active"><i class="fas fa-user-edit"></i> Atualizar Endereço</a></li>
-                <li><a href="#receitas" data-secao="receitas"><i class="fas fa-pills"></i> Receitas</a></li>
-                <li><a href="#exames" data-secao="exames"><i class="fas fa-notes-medical"></i> Exames</a></li>
+                <li><label for="tab-prontuario"><i class="fas fa-file-medical"></i> Meu Prontuário</label></li>
+                <li><label for="tab-receitas"><i class="fas fa-pills"></i> Receitas</label></li>
+                <li><label for="tab-exames"><i class="fas fa-notes-medical"></i> Exames</label></li>
+                <li><label for="tab-agendamentos"><i class="fas fa-calendar-alt"></i> Agendamentos</label></li>
+                <li><label for="tab-atualizar-endereco"><i class="fas fa-user-edit"></i> Atualizar Endereço</label></li>
             </ul>
         </aside>
 
         <!-- Main Content -->
         <main class="conteudo-perfil">
-
-            <!-- ATUALIZAÇÃO DE ENDEREÇO (original mantido) -->
-            <section id="sec-atualizar-endereco" class="secao-painel ativa">
-                <div class="page-header">
-                    <h2>Atualização de Endereço</h2>
-                    <p>Preencha ou atualize seus dados cadastrais para facilitar o agendamento de consultas e atendimento na rede.</p>
-                </div>
-
-                <!-- Formulário de Cadastro / Endereço com CEP Automático -->
-                <div class="card-form-container">
-                    <form id="form-cadastro">
-                        <div class="form-grid">
-
-                            <div class="form-group">
-                                <label for="cep">CEP</label>
-                                <input type="text" id="cep" placeholder="Digite apenas números" maxlength="8" required>
-                            </div>
-
-                            <div class="form-group full-width">
-                                <label for="rua">Rua</label>
-                                <input type="text" id="rua" placeholder="Preenchido automaticamente pelo CEP" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="numero">Número</label>
-                                <input type="text" id="numero" placeholder="Ex: 123" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="bairro">Bairro</label>
-                                <input type="text" id="bairro" placeholder="Preenchido automaticamente" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="cidade">Cidade</label>
-                                <input type="text" id="cidade" placeholder="Preenchido automaticamente" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="uf">UF</label>
-                                <input type="text" id="uf" placeholder="UF" maxlength="2" required>
-                            </div>
-                        </div>
-
-                        <div class="form-actions">
-                            <button type="submit" class="btn-acao">Salvar Alterações</button>
-                        </div>
-                    </form>
-                </div>
-            </section>
 
             <!-- MEU PRONTUÁRIO -->
             <section id="sec-prontuario" class="secao-painel">
@@ -230,43 +187,56 @@
                 </div>
             </section>
 
-<!-- MINHA CONTA -->
-<section id="sec-minha-conta" class="secao-painel">
-    <div class="page-header">
-        <h2>Minha Conta</h2>
-        <p>Visualize os dados gerais da sua conta na Cayac Saúde e acesse seus atalhos rápidos.</p>
+            <!-- ATUALIZAÇÃO DE ENDEREÇO -->
+            <section id="sec-atualizar-endereco" class="secao-painel">
+                <div class="page-header">
+                    <h2>Atualização de Endereço</h2>
+                    <p>Preencha ou atualize seus dados cadastrais para facilitar o agendamento de consultas e atendimento na rede.</p>
+                </div>
+
+                <div class="card-form-container">
+                    <form id="form-cadastro">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="cep">CEP</label>
+                                <input type="text" id="cep" placeholder="Digite apenas números" maxlength="8" required>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="rua">Rua</label>
+                                <input type="text" id="rua" placeholder="Preenchido automaticamente pelo CEP" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="numero">Número</label>
+                                <input type="text" id="numero" placeholder="Ex: 123" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" id="bairro" placeholder="Preenchido automaticamente" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" id="cidade" placeholder="Preenchido automaticamente" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="uf">UF</label>
+                                <input type="text" id="uf" placeholder="UF" maxlength="2" required>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-acao">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </main>
     </div>
 
-    <div class="card-form-container">
-        <div class="info-lista">
-            <div class="info-item">
-                <span class="info-label">Status da Conta</span>
-                <span class="info-valor">Ativa</span>
-            </div>
-            <div class="info-item">
-                <span class="info-label">Acesso Rápido</span>
-                <span class="info-valor">Use o menu lateral para acessar Atualização de Endereço, Meu Prontuário, Agendamentos, Receitas e Exames.</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-</main>
-</div>
-
-<!-- Footer -->
-<footer class="footer">
-<div class="footer-content">
-<div class="redes-sociais">
-    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-</div>
-<p>&copy; 2026 Cayac Saúde — Agendamento & Rede de Hospitais. Todos os direitos reservados.</p>
-</div>
-</footer>
-
-<script src="{% static 'staticJS/usuario.js' %}"></script>
 </body>
 </html>
