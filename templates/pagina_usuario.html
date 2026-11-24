@@ -267,44 +267,6 @@
 </div>
 </footer>
 
-<!-- Script do ViaCEP -->
-<script>
-const inputCep = document.getElementById('cep');
-
-if (inputCep) {
-inputCep.addEventListener('blur', function () {
-    const cep = inputCep.value.replace(/\D/g, '');
-
-    if (cep.length === 8) {
-        fetch(`https://viacep.com.br/ws/${cep}/json/`)
-            .then(response => response.json())
-            .then(data => {
-                if (!data.erro) {
-                    document.getElementById('rua').value = data.logradouro || '';
-                    document.getElementById('bairro').value = data.bairro || '';
-                    document.getElementById('cidade').value = data.localidade || '';
-                    document.getElementById('uf').value = data.uf || '';
-                } else {
-                    alert('CEP não encontrado.');
-                    limparCamposEndereco();
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao buscar o CEP:', error);
-            });
-    } else if (cep.length > 0) {
-        alert('Digite um CEP válido com 8 números.');
-        limparCamposEndereco();
-    }
-});
-}
-
-function limparCamposEndereco() {
-document.getElementById('rua').value = '';
-document.getElementById('bairro').value = '';
-document.getElementById('cidade').value = '';
-document.getElementById('uf').value = '';
-}
-</script>
+<script src="{% static 'staticJS/usuario.js' %}"></script>
 </body>
 </html>

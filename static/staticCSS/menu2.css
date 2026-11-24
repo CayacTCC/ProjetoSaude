@@ -444,3 +444,70 @@ body {
         grid-column: span 1;
     }
 }
+
+/* Conteúdo principal da tela inicial (menu2) */
+.inicio-container {
+    max-width: 1280px;
+    width: 100%;
+    margin: 2.5rem auto;
+    padding: 0 2rem;
+    flex: 1;
+}
+
+.boas-vindas {
+    margin-bottom: 2rem;
+}
+
+.boas-vindas h1 {
+    color: var(--primary-dark);
+    font-size: 1.85rem;
+    font-weight: 700;
+}
+
+.boas-vindas p {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    margin-top: 0.35rem;
+}
+
+/* SEÇÃO UNIDADES PARCEIRAS (CARDS) */
+.servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.card-servico {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-servico:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-servico img {
+    width: 50%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card-servico h3 {
+    color: var(--primary-dark);
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.card-servico p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}

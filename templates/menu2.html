@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Conta - Cayac Saúde</title>
     <link rel="stylesheet" href="{% static 'staticCSS/menu2.css' %}">
-    <script src="{% static 'js/main.js' %}" defer></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,5 +47,30 @@
             </li>
         </ul>
     </nav>
+    <main class="inicio-container">
+        <section class="boas-vindas">
+            <h1>Bem-vindo, {{ request.user.first_name|default:request.user.username }}!</h1>
+            <p>Confira os hospitais disponíveis na rede em Santos.</p>
+        </section>
 
+        <section class="servicos-grid">
+            <div class="card-servico">
+                <img src="{% static 'imagens/FachadaSantaCasa.jpeg' %}" alt="Santa Casa">
+                <h3>Santa Casa</h3>
+                <p>Avenida Doutor Cláudio Luiz da Costa, número 50, no bairro Jabaquara - Santos, SP.</p>
+            </div>
+            <div class="card-servico">
+                <img src="{% static 'imagens/HospitalAnaCosta.jpeg' %}" alt="Ana Costa">
+                <h3>Ana Costa</h3>
+                <p>Rua Pedro Américo, 60, no bairro do Campo Grande - Santos, SP.</p>
+            </div>
+            <div class="card-servico">
+                <img src="{% static 'imagens/HospitalMontSerrat.jpg' %}" alt="Mont Serrat">
+                <h3>Mont Serrat</h3>
+                <p>Praça Correia de Mello, nº 33, Centro Histórico - Santos, SP.</p>
+            </div>
+        </section>
+    </main>
+
+    
    
