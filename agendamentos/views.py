@@ -10,6 +10,7 @@ from hospital.models import Hospital, ExameEspecifico
 def criar_agendamento(request, hospital_id=None):
     paciente = get_object_or_404(Paciente, usuario=request.user)
     hospitais = Hospital.objects.all()
+    exames = ExameEspecifico.objects.all()
 
     hospital_fixo = None
     if hospital_id is not None:
@@ -17,6 +18,14 @@ def criar_agendamento(request, hospital_id=None):
 
     if request.method == "POST":
         id_escolhido = hospital_id or request.POST.get('hospital_id')
+        if not id_escolhido:
+            messages.error(request, "Selecione um hospital antes de confirmar o agendamento.")
+            return render(request, 'agendamento.html', {
+                'hospital': hospital_fixo,
+                'hospitais': hospitais,
+                'exames': exames,
+            })
+
         hospital = get_object_or_404(Hospital, id=id_escolhido)
 
         exame_id = request.POST.get('exame_id')
@@ -35,11 +44,12 @@ def criar_agendamento(request, hospital_id=None):
             observacoes=obs
         )
         messages.success(request, "Consulta agendada com sucesso!")
-        return redirect('fantasma_consulta')
+        return redirect('minhas_consultas')
 
-    return render(request, 'FantasmaDoAgendar.html', {
+    return render(request, 'agendamento.html', {
         'hospital': hospital_fixo,
         'hospitais': hospitais,
+        'exames': exames,
     })
 
 
@@ -47,7 +57,7 @@ def criar_agendamento(request, hospital_id=None):
 def minhas_consultas(request):
     paciente = get_object_or_404(Paciente, usuario=request.user)
     consultas = Agendamento.objects.filter(paciente=paciente)
-    return render(request, 'FantasmaDoMinhasConsultas.html', {'consultas': consultas})
+    return render(request, 'consultas.html', {'consultas': consultas})
 
 
 @login_required(login_url='pagina_login')

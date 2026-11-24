@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Agendamento - Cayac Saúde</title>
+    <link rel="stylesheet" href="{% static 'staticCSS/menu2.css' %}">
+    <link rel="stylesheet" href="{% static 'staticCSS/agendamento.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="{% static 'imagens/Logo_CAYAC.png' %}" alt="Logo Cayac Saúde" class="logo-img">
+            <span class="logo-text">Cayac <span>Saúde</span></span>
+        </div>
+        <div class="user-action-buttons">
+            <a href="{% url 'pagina_login' %}" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <ul class="nav-links">
+            <li><a href="{% url 'home_privada' %}"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="{% url 'perfil_usuario' %}"><i class="fas fa-user"></i> Área do Paciente</a></li>
+            <li><a href="{% url 'criar_agendamento_sem_hospital' %}" class="active"><i class="fas fa-calendar-plus"></i> Agendamento</a></li>
+            <li><a href="{% url 'minhas_consultas' %}"><i class="fas fa-list-check"></i> Minhas Consultas</a></li>
+        </ul>
+    </nav>
+
+    <main class="agendamento-wrapper">
+        <div class="page-header">
+            <h2>Agendar Consulta ou Exame</h2>
+            <p>Preencha os dados abaixo para reservar seu atendimento na rede Cayac Saúde.</p>
+        </div>
+
+        {% if messages %}
+            <div class="mensagens-box">
+                {% for message in messages %}
+                    <div class="alerta alerta-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="card-form-container">
+            <form method="post" class="agendamento-form">
+                {% csrf_token %}
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="hospital_id">Hospital</label>
+                        {% if hospital %}
+                            <input type="text" value="{{ hospital.nome }}" readonly class="input-readonly">
+                            <input type="hidden" name="hospital_id" value="{{ hospital.id }}">
+                        {% else %}
+                            <select name="hospital_id" id="hospital_id" required>
+                                <option value="">Selecione um hospital...</option>
+                                {% for h in hospitais %}
+                                    <option value="{{ h.id }}">{{ h.nome }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exame_id">Exame / Especialidade (opcional)</label>
+                        <select name="exame_id" id="exame_id">
+                            <option value="">Consulta geral / não especificado</option>
+                            {% for ex in exames %}
+                                <option value="{{ ex.id }}">{{ ex }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data">Data da Consulta</label>
+                        <input type="date" name="data" id="data" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="horario">Horário</label>
+                        <input type="time" name="horario" id="horario" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="observacoes">Observações (opcional)</label>
+                        <textarea name="observacoes" id="observacoes" rows="3" placeholder="Alguma informação importante para o atendimento..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions agendamento-acoes">
+                    <a href="{% url 'home_privada' %}" class="btn-secundario">Voltar ao Início</a>
+                    <button type="submit" class="btn-acao"><i class="fas fa-check"></i> Confirmar Agendamento</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>

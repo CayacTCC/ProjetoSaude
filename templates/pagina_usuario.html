@@ -33,18 +33,10 @@
     <!-- Navigation -->
     <nav class="main-nav">
         <ul class="nav-links">
-            <li><a href="{% url 'home_privada' %}" class="active"><i class="fas fa-home"></i> Início</a></li>
-            <li class="dropdown">
-                <a href="{% url 'perfil_usuario' %}">Área do Paciente</a>
-            </li>
-            <li class="dropdown">
-                <a href="#">Rede de Atendimento <i class="fas fa-chevron-down arrow-icon"></i></a>
-                <div class="dropdown-content">
-                    <a href="#">Hospitais Parceiros</a>
-                    <a href="#">Clínicas e Especialidades</a>
-                    <a href="#">Pronto Atendimento</a>
-                </div>
-            </li>
+            <li><a href="{% url 'home_privada' %}"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="{% url 'perfil_usuario' %}"><i class="fas fa-user"></i> Área do Paciente</a></li>
+            <li><a href="{% url 'criar_agendamento_sem_hospital' %}"><i class="fas fa-calendar-plus"></i> Agendamento</a></li>
+            <li><a href="{% url 'minhas_consultas' %}" class="active"><i class="fas fa-list-check"></i> Minhas Consultas</a></li>
         </ul>
     </nav>
 

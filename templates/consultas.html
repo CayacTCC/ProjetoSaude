@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Consultas - Cayac Saúde</title>
+    <link rel="stylesheet" href="{% static 'staticCSS/menu2.css' %}">
+    <link rel="stylesheet" href="{% static 'staticCSS/agendamento.css' %}">
+    <link rel="stylesheet" href="{% static 'staticCSS/consultas.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="{% static 'imagens/Logo_CAYAC.png' %}" alt="Logo Cayac Saúde" class="logo-img">
+            <span class="logo-text">Cayac <span>Saúde</span></span>
+        </div>
+        <div class="user-action-buttons">
+            <a href="{% url 'pagina_login' %}" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <ul class="nav-links">
+            <li><a href="{% url 'home_privada' %}"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="{% url 'perfil_usuario' %}"><i class="fas fa-user"></i> Área do Paciente</a></li>
+            <li><a href="{% url 'criar_agendamento_sem_hospital' %}"><i class="fas fa-calendar-plus"></i> Agendamento</a></li>
+            <li><a href="{% url 'minhas_consultas' %}" class="active"><i class="fas fa-list-check"></i> Minhas Consultas</a></li>
+        </ul>
+    </nav>
+
+    <main class="consultas-wrapper">
+        <div class="page-header consultas-header">
+            <div>
+                <h2>Minhas Consultas</h2>
+                <p>Acompanhe seus agendamentos realizados na rede Cayac Saúde.</p>
+            </div>
+            <a href="{% url 'criar_agendamento_sem_hospital' %}" class="btn-acao btn-novo-agendamento">
+                <i class="fas fa-plus"></i> Novo Agendamento
+            </a>
+        </div>
+
+        {% if messages %}
+            <div class="mensagens-box">
+                {% for message in messages %}
+                    <div class="alerta alerta-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if consultas %}
+            <div class="consultas-lista">
+                {% for consulta in consultas %}
+                    <article class="consulta-card">
+                        <div class="consulta-topo">
+                            <div>
+                                <h3>{{ consulta.hospital.nome }}</h3>
+                                {% if consulta.exame_especifico %}
+                                    <span class="consulta-exame">{{ consulta.exame_especifico }}</span>
+                                {% else %}
+                                    <span class="consulta-exame">Consulta geral / não especificado</span>
+                                {% endif %}
+                            </div>
+                            <span class="badge-status status-{{ consulta.status|lower }}">
+                                {{ consulta.get_status_display }}
+                            </span>
+                        </div>
+
+                        <div class="consulta-detalhes">
+                            <p>
+                                <i class="fas fa-calendar-day"></i>
+                                <strong>Data:</strong> {{ consulta.data_consulta|date:"d/m/Y" }}
+                            </p>
+                            <p>
+                                <i class="fas fa-clock"></i>
+                                <strong>Horário:</strong> {{ consulta.horario_consulta|time:"H:i" }}
+                            </p>
+                            {% if consulta.observacoes %}
+                                <p class="consulta-obs full-span">
+                                    <i class="fas fa-notes-medical"></i>
+                                    <strong>Observações:</strong> {{ consulta.observacoes }}
+                                </p>
+                            {% endif %}
+                        </div>
+
+                        {% if consulta.status == 'AGENDADO' %}
+                            <div class="consulta-rodape">
+                                <form method="post" action="{% url 'cancelar_agendamento' consulta.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-cancelar-consulta">
+                                        <i class="fas fa-times-circle"></i> Cancelar Agendamento
+                                    </button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="card-form-container consulta-vazia">
+                <p class="texto-vazio">Você ainda não possui consultas agendadas.</p>
+                <a href="{% url 'criar_agendamento_sem_hospital' %}" class="btn-acao">
+                    <i class="fas fa-calendar-plus"></i> Agendar Agora
+                </a>
+            </div>
+        {% endif %}
+    </main>
+
+</body>
+</html>

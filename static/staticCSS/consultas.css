@@ -1,0 +1,148 @@
+.consultas-wrapper {
+    max-width: 960px;
+    width: 100%;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
+    flex: 1;
+}
+
+.consultas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-novo-agendamento {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.consultas-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+}
+
+.consulta-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.consulta-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.consulta-topo h3 {
+    color: var(--primary-dark);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.consulta-exame {
+    display: inline-block;
+    margin-top: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+}
+
+.status-agendado {
+    background-color: #e6f6f7;
+    color: var(--primary-dark);
+}
+
+.status-realizado {
+    background-color: #e7f5ec;
+    color: #1c6b3b;
+}
+
+.status-cancelado {
+    background-color: #fdecec;
+    color: #8b1e1e;
+}
+
+.consulta-detalhes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 1.5rem;
+}
+
+.consulta-detalhes p {
+    color: var(--text-color);
+    font-size: 0.94rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.consulta-detalhes p i {
+    color: var(--primary-color);
+}
+
+.consulta-detalhes .full-span {
+    grid-column: span 2;
+}
+
+.consulta-rodape {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-cancelar-consulta {
+    background-color: #ffffff;
+    color: #8b1e1e;
+    border: 1px solid #e6b3b3;
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: all 0.2s ease;
+}
+
+.btn-cancelar-consulta:hover {
+    background-color: #fdecec;
+}
+
+.consulta-vazia {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.consulta-vazia .btn-acao {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@media (max-width: 700px) {
+    .consulta-detalhes {
+        grid-template-columns: 1fr;
+    }
+
+    .consulta-detalhes .full-span {
+        grid-column: span 1;
+    }
+}
