@@ -40,7 +40,7 @@ def listar_hospitais_perto(request):
 def detalhe_hospital(request, pk):
     hospital = get_object_or_404(
         Hospital.objects.prefetch_related(
-            'planos aceitos',
+            'planos_aceitos',
             'exames_disponiveis__exame_base__tipo'
         ),
         pk=pk,

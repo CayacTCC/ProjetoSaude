@@ -38,7 +38,7 @@ class ExameEspecifico(models.Model):
 
     def __str__(self):
         if self.descricao:
-            return f"{self.nome} - [{self.descricao}]"
+            return f"{self.nome} - {self.descricao}"
         return f"{self.nome}"
 
 class Hospital(models.Model):

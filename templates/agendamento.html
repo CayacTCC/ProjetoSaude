@@ -54,30 +54,58 @@
             <form method="post" class="agendamento-form">
                 {% csrf_token %}
 
-                <div class="form-grid">
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label for="tipo_atendimento">Modalidade de Atendimento</label>
+                <select id="tipo_atendimento" name="tipo_atendimento" required>
+                    <option value="">Selecione...</option>
+                    <option value="PLANO">
+                        Usar meu plano de saúde{% if paciente.plano_de_saude %} ({{ paciente.plano_de_saude.nome }}){% else %} {% endif %}
+                    </option>
+                    <option value="SUS">SUS</option>
+                    <option value="PARTICULAR">Particular</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cidade_select">Cidade</label>
+                {% if hospital %}
+                    <input type="text" value="{{ hospital.cidade }}" readonly class="input-readonly">
+                {% else %}
+                    <select id="cidade_select" name="cidade">
+                        <option value="">Selecione uma cidade...</option>
+                        {% for c in cidades %}
+                            <option value="{{ c }}">{{ c }}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+            </div>
+
                     <div class="form-group">
                         <label for="hospital_id">Hospital</label>
                         {% if hospital %}
                             <input type="text" value="{{ hospital.nome }}" readonly class="input-readonly">
-                            <input type="hidden" name="hospital_id" value="{{ hospital.id }}">
+                            <input type="hidden" name="hospital_id" id="hospital_id" value="{{ hospital.id }}"
+                                   data-url-exames-base="{% url 'api_exames_por_hospital' 0 %}">
                         {% else %}
-                            <select name="hospital_id" id="hospital_id" required>
-                                <option value="">Selecione um hospital...</option>
-                                {% for h in hospitais %}
-                                    <option value="{{ h.id }}">{{ h.nome }}</option>
-                                {% endfor %}
+                            <select name="hospital_id" id="hospital_id" required disabled
+                                    data-url-hospitais="{% url 'api_hospitais_por_cidade' %}"
+                                    data-url-exames-base="{% url 'api_exames_por_hospital' 0 %}">
+                                <option value="">Selecione uma cidade primeiro...</option>
                             </select>
                         {% endif %}
                     </div>
 
-                    <div class="form-group">
-                        <label for="exame_id">Exame / Especialidade (opcional)</label>
-                        <select name="exame_id" id="exame_id">
-                            <option value="">Consulta geral / não especificado</option>
-                            {% for ex in exames %}
-                                <option value="{{ ex.id }}">{{ ex }}</option>
-                            {% endfor %}
+                    <div class="form-group full-width">
+                        <label for="exame_id">Exame / Especialidade</label>
+                        <select name="exame_id" id="exame_id" disabled required>
+                            <option value="">Selecione um hospital primeiro...</option>
                         </select>
+
+                        <div id="exame-descricao-box" class="exame-descricao-box" style="display: none;">
+                            <strong id="exame-descricao-titulo"></strong>
+                            <p id="exame-descricao-texto"></p>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -104,5 +132,6 @@
         </div>
     </main>
 
+    <script src="{% static 'staticJS/agendamento.js' %}"></script>
 </body>
 </html>

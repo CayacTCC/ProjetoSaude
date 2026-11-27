@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Conta - Cayac Saúde</title>
     <link rel="stylesheet" href="{% static 'staticCSS/pagina_usuario.css' %}">
-    <script src="{% static 'js/main.js' %}" defer></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,39 +69,74 @@
         <!-- Main Content -->
         <main class="conteudo-perfil">
 
-            <!-- MEU PRONTUÁRIO -->
+    <!-- MEU PRONTUÁRIO -->
             <section id="sec-prontuario" class="secao-painel">
                 <div class="page-header">
                     <h2>Meu Prontuário</h2>
-                    <p>Consulte suas informações clínicas, histórico de atendimentos, alergias e observações médicas.</p>
+                    <p>Consulte suas informações clínicas, CEP cadastrado, plano de saúde e observações médicas.</p>
                 </div>
 
                 <div class="card-form-container">
                     <div class="info-grid">
                         <div class="info-box">
                             <span class="info-label">Paciente</span>
-                            <span class="info-valor">{{ paciente.nome_completo|default:"Não informado" }}</span>
+                            <span class="info-valor">
+                                {{ request.user.first_name|default:request.user.username|default:"Não informado" }}
+                            </span>
                         </div>
+
                         <div class="info-box">
-                            <span class="info-label">Tipo Sanguíneo</span>
-                            <span class="info-valor">{{ prontuario.tipo_sanguineo|default:"Não informado" }}</span>
+                            <span class="info-label">CEP Cadastrado</span>
+                            <span class="info-valor">{{ paciente.cep|default:"Não informado" }}</span>
                         </div>
-                        <div class="info-box">
-                            <span class="info-label">Alergias Registradas</span>
-                            <span class="info-valor">{{ prontuario.alergias|default:"Nenhuma alergia registrada" }}</span>
-                        </div>
-                        <div class="info-box">
-                            <span class="info-label">Condições Crônicas</span>
-                            <span class="info-valor">{{ prontuario.condicoes_cronicas|default:"Nenhuma condição registrada" }}</span>
-                        </div>
+
                         <div class="info-box full-width">
-                            <span class="info-label">Histórico e Observações Médicas</span>
-                            <p class="info-texto">{{ prontuario.observacoes|default:"Nenhum registro de atendimento adicionado até o momento." }}</p>
+                            <span class="info-label">Medicações de Uso Contínuo</span>
+                            <p class="info-texto">{{ paciente.medicacoes_uso_continuo|default:"Nenhuma medicação registrada." }}</p>
                         </div>
                     </div>
+
+                    <form method="post" style="margin-top: 1.5rem;">
+                        {% csrf_token %}
+                        <input type="hidden" name="acao" value="atualizar_prontuario">
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="tipo_sanguineo">Tipo Sanguíneo</label>
+                                <select id="tipo_sanguineo" name="tipo_sanguineo" class="select-perfil">
+                                    <option value="">Selecione...</option>
+                                    {% for ts in tipos_sanguineos %}
+                                        <option value="{{ ts }}" {% if paciente.tipo_sanguineo == ts %}selected{% endif %}>
+                                            {{ ts }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="plano_de_saude">Plano de Saúde</label>
+                                <select id="plano_de_saude" name="plano_de_saude" class="select-perfil">
+                                    <option value="">Sem plano de saúde (SUS / Particular)</option>
+                                    {% for plano in planos_saude %}
+                                        <option value="{{ plano.id }}" {% if paciente.plano_de_saude_id == plano.id %}selected{% endif %}>
+                                            {{ plano.nome }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="doencas_cronicas">Condições Crônicas</label>
+                                <textarea id="doencas_cronicas" name="doencas_cronicas" rows="3" class="textarea-perfil" placeholder="Ex: Asma, Diabetes, Hipertensão...">{{ paciente.doencas_cronicas|default:"" }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-acao">Salvar Prontuário</button>
+                        </div>
+                    </form>
                 </div>
             </section>
-
             <!-- RECEITAS -->
             <section id="sec-receitas" class="secao-painel">
                 <div class="page-header">
@@ -187,37 +221,44 @@
                 </div>
 
                 <div class="card-form-container">
-                    <form id="form-cadastro">
+                    <form id="form-cadastro" method="post">
+                        {% csrf_token %}
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="cep">CEP</label>
-                                <input type="text" id="cep" placeholder="Digite apenas números" maxlength="8" required>
+                                <input type="text" id="cep" name="cep" value="{{ paciente.cep|default:'' }}" placeholder="Digite apenas números" maxlength="9" required>
                             </div>
 
                             <div class="form-group full-width">
                                 <label for="rua">Rua</label>
-                                <input type="text" id="rua" placeholder="Preenchido automaticamente pelo CEP" required>
+                                <input type="text" id="rua" name="rua" value="{{ paciente.rua|default:'' }}" placeholder="Preenchido automaticamente pelo CEP" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="numero">Número</label>
-                                <input type="text" id="numero" placeholder="Ex: 123" required>
+                                <input type="text" id="numero" name="numero" value="{{ paciente.numero|default:'' }}" placeholder="Ex: 123" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="bairro">Bairro</label>
-                                <input type="text" id="bairro" placeholder="Preenchido automaticamente" required>
+                                <input type="text" id="bairro" name="bairro" value="{{ paciente.bairro|default:'' }}" placeholder="Preenchido automaticamente" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="cidade">Cidade</label>
-                                <input type="text" id="cidade" placeholder="Preenchido automaticamente" required>
+                                <input type="text" id="cidade" name="cidade" value="{{ paciente.cidade|default:'' }}" placeholder="Preenchido automaticamente" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="uf">UF</label>
-                                <input type="text" id="uf" placeholder="UF" maxlength="2" required>
+                                <input type="text" id="uf" name="uf" value="{{ paciente.uf|default:'' }}" placeholder="UF" maxlength="2" required>
                             </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-acao">Salvar Alterações</button>
+                        </div>
+                    </form>
                         </div>
 
                         <div class="form-actions">
@@ -229,6 +270,6 @@
 
         </main>
     </div>
-
+    <script src="{% static 'staticJS/usuario.js' %}"></script>
 </body>
 </html>

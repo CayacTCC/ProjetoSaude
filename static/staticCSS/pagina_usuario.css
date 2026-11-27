@@ -469,3 +469,39 @@ body {
     grid-column: span 1;
   }
 }
+
+.select-perfil {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  background-color: #fafbfc;
+  color: var(--text-color);
+  width: 100%;
+}
+
+.select-perfil:focus {
+  border-color: var(--primary-light);
+  background-color: #ffffff;
+}
+
+.textarea-perfil {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  background-color: #fafbfc;
+  color: var(--text-color);
+  width: 100%;
+  resize: vertical;
+  min-height: 85px;
+}
+
+.textarea-perfil:focus {
+  border-color: var(--primary-light);
+  background-color: #ffffff;
+}

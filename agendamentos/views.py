@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -12,6 +13,14 @@ def criar_agendamento(request, hospital_id=None):
     hospitais = Hospital.objects.all()
     exames = ExameEspecifico.objects.all()
 
+    cidades = (
+        Hospital.objects.exclude(cidade__isnull=True)
+        .exclude(cidade__exact='')
+        .values_list('cidade', flat=True)
+        .distinct()
+        .order_by('cidade')
+    )
+
     hospital_fixo = None
     if hospital_id is not None:
         hospital_fixo = get_object_or_404(Hospital, id=hospital_id)
@@ -24,6 +33,7 @@ def criar_agendamento(request, hospital_id=None):
                 'hospital': hospital_fixo,
                 'hospitais': hospitais,
                 'exames': exames,
+                'cidades': cidades,
             })
 
         hospital = get_object_or_404(Hospital, id=id_escolhido)
@@ -50,6 +60,45 @@ def criar_agendamento(request, hospital_id=None):
         'hospital': hospital_fixo,
         'hospitais': hospitais,
         'exames': exames,
+        'cidades': cidades,
+    })
+
+
+@login_required(login_url='pagina_login')
+def api_hospitais_por_cidade(request):
+    cidade = request.GET.get('cidade', '').strip()
+    tipo = request.GET.get('tipo_atendimento', '').strip().upper()
+    paciente = get_object_or_404(Paciente, usuario=request.user)
+
+    hospitais = Hospital.objects.filter(cidade__iexact=cidade)
+
+    if tipo == 'PLANO':
+        if paciente.plano_de_saude:
+            hospitais = hospitais.filter(planos_aceitos=paciente.plano_de_saude)
+        else:
+            hospitais = Hospital.objects.none()
+
+    hospitais = hospitais.order_by('nome').distinct()
+
+    return JsonResponse({
+        'hospitais': [{'id': h.id, 'nome': h.nome} for h in hospitais]
+    })
+
+
+@login_required(login_url='pagina_login')
+def api_exames_por_hospital(request, hospital_id):
+    hospital = get_object_or_404(Hospital, id=hospital_id)
+    exames = hospital.exames_disponiveis.all().order_by('nome')
+
+    return JsonResponse({
+        'exames': [
+            {
+                'id': e.id,
+                'nome': e.nome,
+                'descricao': e.descricao or '',
+            }
+            for e in exames
+        ]
     })
 
 
