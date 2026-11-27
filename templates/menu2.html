@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Conta - Cayac Saúde</title>
+    <title>Início - Cayac Saúde</title>
     <link rel="stylesheet" href="{% static 'staticCSS/menu2.css' %}">
 
     <!-- Google Fonts -->
@@ -32,14 +32,10 @@
     <!-- Navigation -->
     <nav class="main-nav">
         <ul class="nav-links">
-            <li><a href="#" class="active"><i class="fas fa-home"></i> Início</a></li>
-            <li class="dropdown">
-                <a href="{% url 'perfil_usuario' %}">Área do Paciente </a>
-            </li>
-            <li class="dropdown">
-                <a href="{% url 'criar_agendamento_sem_hospital'%}"> agendamento </a>
-                </div>
-            </li>
+            <li><a href="{% url 'home_privada' %}" class="active"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="{% url 'perfil_usuario' %}"><i class="fas fa-user"></i> Área do Paciente</a></li>
+            <li><a href="{% url 'criar_agendamento_sem_hospital' %}"><i class="fas fa-calendar-plus"></i> Agendamento</a></li>
+            <li><a href="{% url 'minhas_consultas' %}"><i class="fas fa-list-check"></i> Minhas Consultas</a></li>
         </ul>
     </nav>
     <main class="inicio-container">
@@ -49,6 +45,15 @@
         </section>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <main class="inicio-container">
+        <section class="boas-vindas">
+            <h1>Bem-vindo, {{ request.user.first_name|default:request.user.username }}!</h1>
+            <p>Confira os hospitais disponíveis na rede em Santos.</p>
+        </section>
+
+>>>>>>> 0748ac9 (Alterações no prontuário da página do usuário e na página de agendamentos)
         <section class="servicos-grid">
             <div class="card-servico">
                 <img src="{% static 'imagens/FachadaSantaCasa.jpeg' %}" alt="Santa Casa">
@@ -68,7 +73,12 @@
         </section>
     </main>
 
+<<<<<<< HEAD
     
    
 =======
 >>>>>>> b0cea2b (Criação da página de agendamento e consulta, e alteração nos links entre páginas.)
+=======
+</body>
+</html>
+>>>>>>> 0748ac9 (Alterações no prontuário da página do usuário e na página de agendamentos)

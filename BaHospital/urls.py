@@ -19,7 +19,6 @@ from django.urls import path, include
 from pacientes import views
 from agendamentos import views as agendamento_views
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.menu_vitrine, name='home_publica'),
@@ -31,5 +30,4 @@ urlpatterns = [
     path('buscar/', include('buscar.urls')),
     path('hospitais/', include('hospital.urls')),
     path('consultas/', agendamento_views.minhas_consultas, name='minhas_consultas'),
-    
 ]

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Conta - Cayac Saúde</title>
     <link rel="stylesheet" href="{% static 'staticCSS/pagina_usuario.css' %}">
-    <script src="{% static 'js/main.js' %}" defer></script>
+    <script src="{% static 'staticJS/usuario.js' %}" defer></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,15 +33,10 @@
     <!-- Navigation -->
     <nav class="main-nav">
         <ul class="nav-links">
-            <li><a href="{% url 'home_privada' %}" class="active"><i class="fas fa-home"></i> Início</a></li>
-            <li class="dropdown">
-                <a href="{% url 'perfil_usuario' %}">Área do Paciente </a>
-
-            </li>
-            <li class="dropdown">
-                <a href="{% url 'criar_agendamento'%}">agendamento </a>
-                
-            </li>
+            <li><a href="{% url 'home_privada' %}"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="{% url 'perfil_usuario' %}"><i class="fas fa-user"></i> Área do Paciente</a></li>
+            <li><a href="{% url 'criar_agendamento_sem_hospital' %}"><i class="fas fa-calendar-plus"></i> Agendamento</a></li>
+            <li><a href="{% url 'minhas_consultas' %}" class="active"><i class="fas fa-list-check"></i> Minhas Consultas</a></li>
         </ul>
     </nav>
 
@@ -56,69 +51,27 @@
                 <h4>Minha Conta</h4>
             </div>
             <ul class="sidebar-menu">
-                <li><a href="#prontuario" data-secao="prontuario"><i class="fas fa-file-medical"></i> Meu Prontuário</a></li>
-                <li><a href="#agendamentos" data-secao="agendamentos"><i class="fas fa-calendar-alt"></i> Agendamentos</a></li>
-                <li><a href="#atualizar-endereco" data-secao="atualizar-endereco" class="active"><i class="fas fa-user-edit"></i> Atualizar Endereço</a></li>
+                <li><a href="#prontuario" data-secao="prontuario" class="active"><i class="fas fa-file-medical"></i> Meu Prontuário</a></li>
                 <li><a href="#receitas" data-secao="receitas"><i class="fas fa-pills"></i> Receitas</a></li>
                 <li><a href="#exames" data-secao="exames"><i class="fas fa-notes-medical"></i> Exames</a></li>
+                <li><a href="#agendamentos" data-secao="agendamentos"><i class="fas fa-calendar-alt"></i> Agendamentos</a></li>
+                <li><a href="#atualizar-endereco" data-secao="atualizar-endereco"><i class="fas fa-user-edit"></i> Atualizar Endereço</a></li>
             </ul>
         </aside>
 
         <!-- Main Content -->
         <main class="conteudo-perfil">
 
-            <!-- ATUALIZAÇÃO DE ENDEREÇO (original mantido) -->
-            <section id="sec-atualizar-endereco" class="secao-painel ativa">
-                <div class="page-header">
-                    <h2>Atualização de Endereço</h2>
-                    <p>Preencha ou atualize seus dados cadastrais para facilitar o agendamento de consultas e atendimento na rede.</p>
+            {% if messages %}
+                <div class="mensagens-box" style="margin-bottom: 1rem;">
+                    {% for message in messages %}
+                        <div class="alerta alerta-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
                 </div>
-
-                <!-- Formulário de Cadastro / Endereço com CEP Automático -->
-                <div class="card-form-container">
-                    <form id="form-cadastro">
-                        <div class="form-grid">
-
-                            <div class="form-group">
-                                <label for="cep">CEP</label>
-                                <input type="text" id="cep" placeholder="Digite apenas números" maxlength="8" required>
-                            </div>
-
-                            <div class="form-group full-width">
-                                <label for="rua">Rua</label>
-                                <input type="text" id="rua" placeholder="Preenchido automaticamente pelo CEP" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="numero">Número</label>
-                                <input type="text" id="numero" placeholder="Ex: 123" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="bairro">Bairro</label>
-                                <input type="text" id="bairro" placeholder="Preenchido automaticamente" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="cidade">Cidade</label>
-                                <input type="text" id="cidade" placeholder="Preenchido automaticamente" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="uf">UF</label>
-                                <input type="text" id="uf" placeholder="UF" maxlength="2" required>
-                            </div>
-                        </div>
-
-                        <div class="form-actions">
-                            <button type="submit" class="btn-acao">Salvar Alterações</button>
-                        </div>
-                    </form>
-                </div>
-            </section>
+            {% endif %}
 
             <!-- MEU PRONTUÁRIO -->
-            <section id="sec-prontuario" class="secao-painel">
+            <section id="sec-prontuario" class="secao-painel ativa">
                 <div class="page-header">
                     <h2>Meu Prontuário</h2>
                     <p>Consulte suas informações clínicas, histórico de atendimentos, alergias e observações médicas.</p>
@@ -128,25 +81,70 @@
                     <div class="info-grid">
                         <div class="info-box">
                             <span class="info-label">Paciente</span>
-                            <span class="info-valor">{{ paciente.nome_completo|default:"Não informado" }}</span>
+                            <span class="info-valor">
+                                {{ request.user.first_name|default:request.user.username|default:"Não informado" }}
+                            </span>
                         </div>
                         <div class="info-box">
                             <span class="info-label">Tipo Sanguíneo</span>
-                            <span class="info-valor">{{ prontuario.tipo_sanguineo|default:"Não informado" }}</span>
+                            <span class="info-valor">{{ paciente.tipo_sanguineo|default:"Não informado" }}</span>
+                        </div>
+                        <div class="info-box">
+                            <span class="info-label">CEP Cadastrado</span>
+                            <span class="info-valor">{{ paciente.cep|default:"Não informado" }}</span>
+                        </div>
+                        <div class="info-box">
+                            <span class="info-label">Plano de Saúde</span>
+                            <span class="info-valor">{{ paciente.plano_de_saude.nome|default:"Sem plano de saúde (SUS / Particular)" }}</span>
                         </div>
                         <div class="info-box">
                             <span class="info-label">Alergias Registradas</span>
-                            <span class="info-valor">{{ prontuario.alergias|default:"Nenhuma alergia registrada" }}</span>
+                            <span class="info-valor">Nenhuma alergia registrada</span>
                         </div>
                         <div class="info-box">
                             <span class="info-label">Condições Crônicas</span>
-                            <span class="info-valor">{{ prontuario.condicoes_cronicas|default:"Nenhuma condição registrada" }}</span>
+                            <span class="info-valor">{{ paciente.doencas_cronicas|default:"Nenhuma condição registrada" }}</span>
                         </div>
                         <div class="info-box full-width">
                             <span class="info-label">Histórico e Observações Médicas</span>
-                            <p class="info-texto">{{ prontuario.observacoes|default:"Nenhum registro de atendimento adicionado até o momento." }}</p>
+                            <p class="info-texto">Nenhum registro de atendimento adicionado até o momento.</p>
                         </div>
                     </div>
+
+                    <form method="post" style="margin-top: 1.5rem;">
+                        {% csrf_token %}
+                        <input type="hidden" name="acao" value="atualizar_prontuario">
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="tipo_sanguineo">Tipo Sanguíneo</label>
+                                <select id="tipo_sanguineo" name="tipo_sanguineo" class="select-perfil">
+                                    <option value="">Selecione...</option>
+                                    {% for ts in tipos_sanguineos %}
+                                        <option value="{{ ts }}" {% if paciente.tipo_sanguineo == ts %}selected{% endif %}>
+                                            {{ ts }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="plano_de_saude">Plano de Saúde</label>
+                                <select id="plano_de_saude" name="plano_de_saude" class="select-perfil">
+                                    <option value="">Sem plano de saúde (SUS / Particular)</option>
+                                    {% for plano in planos_saude %}
+                                        <option value="{{ plano.id }}" {% if paciente.plano_de_saude_id == plano.id %}selected{% endif %}>
+                                            {{ plano.nome }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-acao">Salvar Prontuário</button>
+                        </div>
+                    </form>
                 </div>
             </section>
 
@@ -226,13 +224,14 @@
                 </div>
             </section>
 
-            <!-- MINHA CONTA -->
-            <section id="sec-minha-conta" class="secao-painel">
+            <!-- ATUALIZAÇÃO DE ENDEREÇO -->
+            <section id="sec-atualizar-endereco" class="secao-painel">
                 <div class="page-header">
-                    <h2>Minha Conta</h2>
-                    <p>Visualize os dados gerais da sua conta na Cayac Saúde e acesse seus atalhos rápidos.</p>
+                    <h2>Atualização de Endereço</h2>
+                    <p>Preencha ou atualize seus dados cadastrais para facilitar o agendamento de consultas e atendimento na rede.</p>
                 </div>
 
+<<<<<<< HEAD
     <div class="card-form-container">
         <div class="info-lista">
             <div class="info-item">
@@ -266,3 +265,51 @@
 <script src="{% static 'staticJS/usuario.js' %}"></script>
 </body>
 </html>
+=======
+                <div class="card-form-container">
+                    <form id="form-cadastro" method="post">
+                        {% csrf_token %}
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="cep">CEP</label>
+                                <input type="text" id="cep" name="cep" value="{{ paciente.cep|default:'' }}" placeholder="Digite apenas números" maxlength="9" required>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="rua">Rua</label>
+                                <input type="text" id="rua" name="rua" value="{{ paciente.rua|default:'' }}" placeholder="Preenchido automaticamente pelo CEP" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="numero">Número</label>
+                                <input type="text" id="numero" name="numero" value="{{ paciente.numero|default:'' }}" placeholder="Ex: 123" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" id="bairro" name="bairro" value="{{ paciente.bairro|default:'' }}" placeholder="Preenchido automaticamente" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" id="cidade" name="cidade" value="{{ paciente.cidade|default:'' }}" placeholder="Preenchido automaticamente" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="uf">UF</label>
+                                <input type="text" id="uf" name="uf" value="{{ paciente.uf|default:'' }}" placeholder="UF" maxlength="2" required>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-acao">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>
+</html>
+>>>>>>> 0748ac9 (Alterações no prontuário da página do usuário e na página de agendamentos)

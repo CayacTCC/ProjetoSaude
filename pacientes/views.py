@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import Paciente
+from hospital.models import PlanoSaude
 
 def menu_vitrine(request):
     return render (request, 'index.html')
@@ -101,8 +102,53 @@ def cadastro_enderecoP(request):
 
     return render(request, 'pagina_usuario.html')
 
+TIPOS_SANGUINEOS = ['AB+', 'AB-', 'A+', 'A-', 'B+', 'B-', 'O+', 'O-']
+
+
 @login_required(login_url='pagina_login')
 def perfil_view(request):
+    paciente, _ = Paciente.objects.get_or_create(
+        usuario=request.user,
+        defaults={'cpf': ''}
+    )
+    planos_saude = PlanoSaude.objects.all()
 
-    
-    return render (request, 'pagina_usuario.html') 
+    if request.method == "POST":
+        acao = request.POST.get('acao', '')
+
+        if acao == 'atualizar_prontuario':
+            tipo_sang = request.POST.get('tipo_sanguineo', '').strip()
+            doencas = request.POST.get('doencas_cronicas', '').strip()
+            plano_id = request.POST.get('plano_de_saude')
+
+            paciente.tipo_sanguineo = tipo_sang if tipo_sang in TIPOS_SANGUINEOS else None
+            paciente.doencas_cronicas = doencas or None
+            paciente.plano_de_saude = (
+                PlanoSaude.objects.filter(id=plano_id).first() if plano_id else None
+            )
+            paciente.save()
+
+            messages.success(request, "Dados do prontuário atualizados com sucesso!")
+            return redirect('perfil_usuario')
+
+        cep_digitado = request.POST.get('cep', '').replace('-', '').strip()
+        rua_digitada = request.POST.get('rua', '').strip()
+        bairro_digitada = request.POST.get('bairro', '').strip()
+        cidade_digitada = request.POST.get('cidade', '').strip()
+        uf_digitada = request.POST.get('uf', '').strip().upper()
+
+        paciente.cep = cep_digitado
+        paciente.rua = rua_digitada
+        paciente.bairro = bairro_digitada
+        paciente.cidade = cidade_digitada
+        paciente.uf = uf_digitada
+        paciente.save()
+
+        messages.success(request, "Endereço atualizado com sucesso!")
+        return redirect('perfil_usuario')
+
+    return render(request, 'pagina_usuario.html', {
+        'paciente': paciente,
+        'planos_saude': planos_saude,
+        'tipos_sanguineos': TIPOS_SANGUINEOS,
+    })

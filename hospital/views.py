@@ -5,6 +5,7 @@ from geopy.distance import geodesic
 from .models import Hospital
 from pacientes.models import Paciente
 
+
 @login_required(login_url='pagina_login')
 def listar_hospitais_perto(request):
     paciente = Paciente.objects.get(usuario=request.user)
@@ -21,7 +22,6 @@ def listar_hospitais_perto(request):
         for hospital in hospitais:
             if hospital.latitude and hospital.longitude:
                 ponto_hospital = (hospital.latitude, hospital.longitude)
-
                 distancia = geodesic(ponto_paciente, ponto_hospital).km
 
                 lista_ordenada.append({
@@ -36,15 +36,16 @@ def listar_hospitais_perto(request):
         'paciente': paciente
     })
 
+
 @login_required(login_url='pagina_login')
 def detalhe_hospital(request, pk):
     hospital = get_object_or_404(
         Hospital.objects.prefetch_related(
-            'planos aceitos',
-            'exames_disponiveis__exame_base__tipo'
+            'planos_aceitos',
+            'exames_disponiveis_exame_base_tipo'
         ),
         pk=pk,
     )
-    return render (request, 'hospital/detalhe_hospital.html',{
+    return render(request, 'hospital/detalhe_hospital.html', {
         'hospital': hospital,
     })

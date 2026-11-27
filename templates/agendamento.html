@@ -2,114 +2,136 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Agendar Consulta | Cayac Saúde</title>
-  <!-- Ajuste o caminho dentro de static conforme sua pasta (ex: 'css/agendamento.css') -->
-  <link rel="stylesheet" href="{% static 'agendamento.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Agendamento - Cayac Saúde</title>
+    <link rel="stylesheet" href="{% static 'staticCSS/menu2.css' %}">
+    <link rel="stylesheet" href="{% static 'staticCSS/agendamento.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-<header class="topo">
-  <a class="marca" href="{% url 'area_paciente' %}" aria-label="Cayac Saúde - início">
-    <svg class="marca-img" viewBox="0 0 64 64" aria-hidden="true">
-      <circle cx="32" cy="32" r="30" fill="#eef6f6" stroke="#0f6b73" stroke-width="2"/>
-      <path d="M26 14h12v12h12v12H38v12H26V38H14V26h12z" fill="none" stroke="#17a59a" stroke-width="3" stroke-linejoin="round"/>
-      <text x="32" y="58" font-size="9" font-weight="700" text-anchor="middle" fill="#0f6b73" font-family="Arial">Cayac</text>
-    </svg>
-    <span class="marca-nome">Cayac <em>Saúde</em></span>
-  </a>
-  <a class="sair" href="{% url 'logout' %}">
-    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/>
-      <path d="M11 12h10M17 7l5 5-5 5"/>
-    </svg>
-    Sair
-  </a>
-</header>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="{% static 'imagens/Logo_CAYAC.png' %}" alt="Logo Cayac Saúde" class="logo-img">
+            <span class="logo-text">Cayac <span>Saúde</span></span>
+        </div>
+        <div class="user-action-buttons">
+            <a href="{% url 'pagina_login' %}" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        </div>
+    </header>
 
-<nav class="menu" aria-label="Área do paciente">
-  <a href="{% url 'area_paciente' %}">
-    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg>
-    Início
-  </a>
-  <a href="{% url 'area_paciente' %}#paciente">Área do Paciente</a>
-  <a href="{% url 'agendamento' %}" aria-current="page">Agendamento</a>
-</nav>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <ul class="nav-links">
+            <li><a href="{% url 'home_privada' %}"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="{% url 'perfil_usuario' %}"><i class="fas fa-user"></i> Área do Paciente</a></li>
+            <li><a href="{% url 'criar_agendamento_sem_hospital' %}" class="active"><i class="fas fa-calendar-plus"></i> Agendamento</a></li>
+            <li><a href="{% url 'minhas_consultas' %}"><i class="fas fa-list-check"></i> Minhas Consultas</a></li>
+        </ul>
+    </nav>
 
-<main>
-  <form class="cartao" id="form" method="POST" novalidate>
-    {% csrf_token %}
-    <h2>Agendar Consulta</h2>
-    <p class="sub">Escolha o hospital, a data e o horário que combinam com você</p>
-
-    <fieldset>
-      <legend>Onde e quando</legend>
-      <div class="grade">
-        <div>
-          <label for="cidade">Cidade</label>
-          <select id="cidade" name="cidade" required>
-            <option value="">Selecione a cidade</option>
-            <option value="Bertioga">Bertioga</option>
-            <option value="Cubatão">Cubatão</option>
-            <option value="Guarujá">Guarujá</option>
-            <option value="Itanhaém">Itanhaém</option>
-            <option value="Mongaguá">Mongaguá</option>
-            <option value="Peruíbe">Peruíbe</option>
-            <option value="Praia Grande">Praia Grande</option>
-            <option value="Santos">Santos</option>
-            <option value="São Vicente">São Vicente</option>
-          </select>
-          <div class="erro-msg" data-for="cidade"></div>
+    <main class="agendamento-wrapper">
+        <div class="page-header">
+            <h2>Agendar Consulta ou Exame</h2>
+            <p>Preencha os dados abaixo para reservar seu atendimento na rede Cayac Saúde.</p>
         </div>
 
-        <div>
-          <label for="hospital">Hospital</label>
-          <select id="hospital" name="hospital" required disabled>
-            <option value="">Escolha a cidade primeiro</option>
-          </select>
-          <div class="erro-msg" data-for="hospital"></div>
+        {% if messages %}
+            <div class="mensagens-box">
+                {% for message in messages %}
+                    <div class="alerta alerta-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="card-form-container">
+            <form method="post" class="agendamento-form">
+                {% csrf_token %}
+
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="tipo_atendimento">Modalidade de Atendimento</label>
+                        <select id="tipo_atendimento" name="tipo_atendimento" required>
+                            <option value="">Selecione...</option>
+                            <option value="PLANO">
+                                Usar meu plano de saúde{% if paciente.plano_de_saude %} ({{ paciente.plano_de_saude.nome }}){% endif %}
+                            </option>
+                            <option value="SUS">SUS</option>
+                            <option value="PARTICULAR">Particular</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cidade_select">Cidade</label>
+                        {% if hospital %}
+                            <input type="text" value="{{ hospital.cidade }}" readonly class="input-readonly">
+                        {% else %}
+                            <select id="cidade_select" name="cidade" required>
+                                <option value="">Selecione uma cidade primeiro...</option>
+                                {% for c in cidades %}
+                                    <option value="{{ c }}">{{ c }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hospital_id">Hospital</label>
+                        {% if hospital %}
+                            <input type="text" value="{{ hospital.nome }}" readonly class="input-readonly">
+                            <input type="hidden" name="hospital_id" id="hospital_id" value="{{ hospital.id }}"
+                                   data-url-exames-base="{% url 'api_exames_por_hospital' 0 %}">
+                        {% else %}
+                            <select name="hospital_id" id="hospital_id" required disabled
+                                    data-url-hospitais="{% url 'api_hospitais_por_cidade' %}"
+                                    data-url-exames-base="{% url 'api_exames_por_hospital' 0 %}">
+                                <option value="">Selecione a cidade primeiro...</option>
+                            </select>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="exame_id">Exame / Especialidade</label>
+                        <select name="exame_id" id="exame_id" disabled required>
+                            <option value="">Selecione o hospital primeiro...</option>
+                        </select>
+
+                        <div id="exame-descricao-box" class="exame-descricao-box" style="display: none;">
+                            <strong id="exame-descricao-titulo"></strong>
+                            <p id="exame-descricao-texto"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data">Data da Consulta</label>
+                        <input type="date" name="data" id="data" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="horario">Horário</label>
+                        <input type="time" name="horario" id="horario" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="observacoes">Observações (opcional)</label>
+                        <textarea name="observacoes" id="observacoes" rows="3" placeholder="Alguma informação importante para o atendimento..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions agendamento-acoes">
+                    <a href="{% url 'home_privada' %}" class="btn-secundario">Voltar ao Início</a>
+                    <button type="submit" class="btn-acao"><i class="fas fa-check"></i> Confirmar Agendamento</button>
+                </div>
+            </form>
         </div>
+    </main>
 
-        <div>
-          <label for="especialidade">Especialidade</label>
-          <select id="especialidade" name="especialidade" required>
-            <option value="">Selecione a especialidade</option>
-            <option value="Clínica geral">Clínica geral</option>
-            <option value="Cardiologia">Cardiologia</option>
-            <option value="Dermatologia">Dermatologia</option>
-            <option value="Ginecologia">Ginecologia</option>
-            <option value="Neurologia">Neurologia</option>
-            <option value="Ortopedia">Ortopedia</option>
-            <option value="Pediatria">Pediatria</option>
-            <option value="Oftalmologia">Oftalmologia</option>
-          </select>
-          <div class="erro-msg" data-for="especialidade"></div>
-        </div>
-
-        <div>
-          <label for="data">Data</label>
-          <input type="date" id="data" name="data" required>
-          <div class="erro-msg" data-for="data"></div>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>Horário disponível</legend>
-      <div id="horas" class="horas" role="group" aria-label="Horários">
-        <p class="aviso-horario">Selecione uma data para ver os horários.</p>
-      </div>
-      <input type="hidden" id="horario-selecionado" name="horario" required>
-      <div class="erro-msg" data-for="horario"></div>
-    </fieldset>
-
-    <div class="acoes">
-      <button type="submit" class="btn-confirmar">Confirmar Agendamento</button>
-    </div>
-  </form>
-</main>
-
-<script src="{% static 'agendamento.js' %}"></script>
+    <script src="{% static 'staticJS/agendamento.js' %}"></script>
 </body>
 </html>
