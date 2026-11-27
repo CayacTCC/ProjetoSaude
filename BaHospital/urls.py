@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from pacientes import views
+from agendamentos import views as agendamento_views
 
 
 urlpatterns = [
@@ -28,6 +29,7 @@ urlpatterns = [
     path('perfil/', views.perfil_view, name='perfil_usuario'),
     path('agendamentos/', include('agendamentos.urls')),
     path('buscar/', include('buscar.urls')),
-    path('hospitais/', include('hospital.urls'))
+    path('hospitais/', include('hospital.urls')),
+    path('consultas/', agendamento_views.minhas_consultas, name='minhas_consultas'),
     
 ]

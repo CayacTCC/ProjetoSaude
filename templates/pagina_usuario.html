@@ -36,15 +36,11 @@
             <li><a href="{% url 'home_privada' %}" class="active"><i class="fas fa-home"></i> Início</a></li>
             <li class="dropdown">
                 <a href="{% url 'perfil_usuario' %}">Área do Paciente </a>
-               
+
             </li>
             <li class="dropdown">
-                <a href="#">Rede de Atendimento <i class="fas fa-chevron-down arrow-icon"></i></a>
-                <div class="dropdown-content">
-                    <a href="#">Hospitais Parceiros</a>
-                    <a href="#">Clínicas e Especialidades</a>
-                    <a href="#">Pronto Atendimento</a>
-                </div>
+                <a href="{% url 'criar_agendamento'%}">agendamento </a>
+                
             </li>
         </ul>
     </nav>
@@ -230,12 +226,12 @@
                 </div>
             </section>
 
-<!-- MINHA CONTA -->
-<section id="sec-minha-conta" class="secao-painel">
-    <div class="page-header">
-        <h2>Minha Conta</h2>
-        <p>Visualize os dados gerais da sua conta na Cayac Saúde e acesse seus atalhos rápidos.</p>
-    </div>
+            <!-- MINHA CONTA -->
+            <section id="sec-minha-conta" class="secao-painel">
+                <div class="page-header">
+                    <h2>Minha Conta</h2>
+                    <p>Visualize os dados gerais da sua conta na Cayac Saúde e acesse seus atalhos rápidos.</p>
+                </div>
 
     <div class="card-form-container">
         <div class="info-lista">

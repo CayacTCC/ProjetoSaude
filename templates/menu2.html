@@ -35,14 +35,9 @@
             <li><a href="#" class="active"><i class="fas fa-home"></i> Início</a></li>
             <li class="dropdown">
                 <a href="{% url 'perfil_usuario' %}">Área do Paciente </a>
-               
             </li>
             <li class="dropdown">
-                <a href="#">Rede de Atendimento <i class="fas fa-chevron-down arrow-icon"></i></a>
-                <div class="dropdown-content">
-                    <a href="#">Hospitais Parceiros</a>
-                    <a href="#">Clínicas e Especialidades</a>
-                    <a href="#">Pronto Atendimento</a>
+                <a href="{% url 'criar_agendamento_sem_hospital'%}"> agendamento </a>
                 </div>
             </li>
         </ul>
@@ -53,6 +48,7 @@
             <p>Confira os hospitais disponíveis na rede em Santos.</p>
         </section>
 
+<<<<<<< HEAD
         <section class="servicos-grid">
             <div class="card-servico">
                 <img src="{% static 'imagens/FachadaSantaCasa.jpeg' %}" alt="Santa Casa">
@@ -74,3 +70,5 @@
 
     
    
+=======
+>>>>>>> b0cea2b (Criação da página de agendamento e consulta, e alteração nos links entre páginas.)
